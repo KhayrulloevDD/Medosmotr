@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title class="color">Вход</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  </head>
+  <body>
+        <!-- Image and text -->
+    <nav class="navbar navbar-dark bg-faded nav-bg color">
+      <div class="container">
+        <a class="navbar-brand color" href="index.php">
+          <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          Медосмотр
+        </a>
+      </div>
+    </nav>
+
+    <h3 class="display 1 mt-5 mb-4 text-center">Вход в систему:</h3>
+    
+    <div class="container text-center">
+      <form method="POST" action="index.php?option=login">
+        <div class="form-row align-items-center">
+          <div class="col-4 m-auto">
+            <input type="text" class="form-control mb-2" name="name_login" id="login" placeholder="Логин" />
+          </div>
+          <div class="col-4 m-auto">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text"></div>
+              </div>
+              <input type="password" class="form-control" name="name_password" id="password" placeholder="Пароль" />
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" id="autoSizingCheck" />
+              <label class="form-check-label" for="autoSizingCheck">Remember me</label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <input type="button" class="btn btn-primary" value="Назад" onClick='location.href="index.php"'>
+            <button type="submit" class="btn btn-primary ml-3">Войти</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <footer class="footer">
+      <div class="container text-center">
+        <span class="text-muted">УрфУ 2018</span>
+      </div>
+    </footer>
+    
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/additional-methods.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="js/validating.js"></script>
+  </body>
+</html>
