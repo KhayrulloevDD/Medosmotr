@@ -18,19 +18,33 @@
           <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
           Медосмотр
         </a>
+        <input type="button" class="btn btn-primary float-right" value="Выйти" onClick='location.href="index.php?option=show&page=main"'>
+        <h5 class="float-right mt-2 mr-2">{{name}}</h5>
       </div>
     </nav>
 
-    <h1 class="display 1 text-center">Админ панель</h1>  
+    <h1 class="display 1 text-center mt-5 mb-5">Список доступных врачей</h1>  
     
-    
-    
-    <!-- контекст -->
-
-
-    
-    <div class="container text-right">
-      <input type="button" class="btn btn-primary" value="Назад" onClick='location.href="index.php"'>
+    <!-- контент -->
+    <div class="container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>ФИО</th>
+            <th>Тип</th>
+            <th>Описание</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Генадий Владимирович</td>
+            <td>Эндокренолог</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <footer class="footer">
@@ -39,6 +53,48 @@
       </div>
     </footer>
     
+    <div class="container text-right">
+      <button type="button" class="btn btn-primary" data-id="0" data-toggle="modal" data-target="#addDoc">Добавить</button>
+    </div>
+    <div id="addDoc" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addDocLabel" aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLiveLabel">Добавить нового врача:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!-- форма -->
+        <form class="form" id="myForm" role="form" method="post" action="index.php?option=save">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="text-input" class="col-2 col-form-label">ФИО</label>
+              <div class="col-10">
+                <input class="form-control" name="name" type="text" placeholder="Иванов Иван Иванович" id="name">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="text-input" class="col-2 col-form-label">Тип</label>
+              <div class="col-10">
+                <input class="form-control" name="group" type="text" placeholder="Педиатр" id="type">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email-input" class="col-2 col-form-label">Описание</label>
+              <div class="col-10">
+                <input class="form-control" name="desc" type="text" placeholder="Добавьте описание" id="description">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" id="submit" class="btn btn-primary">Подтвердить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>

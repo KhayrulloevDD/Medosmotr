@@ -46,11 +46,41 @@
 					$password = $_POST['name_password'];
 					$result = $this->auth($login, $password);
 					break;
+				case 'addDoc':
+					$this->addDoc();
 				default:
 					break;
 			}
 		}
 
+		// добавить нового врача с аккаунта администратора
+		public function addDoc(){
+			//Продолжать тут
+			if(isset($_POST['name']))
+				$name = $_POST['name'];
+			if(isset($_POST['group']))
+				$group = $_POST['group'];
+			if(isset($_POST['email']))
+				$email = $_POST['email'];
+			if(isset($_POST['phone']))
+				$phone = $_POST['phone'];
+			if(isset($_POST['date']))
+				$date = $_POST['date'];
+			if(isset($_POST['time']))
+				$time = $_POST['time'];
+			if(isset($_POST['doc_type']))
+				$doc_type = $_POST['doc_type'];
+
+			$query = "INSERT into raspisanie (name, gr, email, phone, date, time, type) VALUES ('$name', '$group', '$email', '$phone', '$date', '$time', '$doc_type')";
+
+			if ($this->connection->query($query) === TRUE) {
+			    header("location: /index.php?option=show&page=main&success=1");
+			} else {
+			    echo "Ошибка при записи к врачу";
+			}
+		}
+
+		// авторизация
 		public function auth($log, $pass){
 			$query = "SELECT * FROM users WHERE login = '$log' AND password = '$pass'";
 			$result = $this->connection->query($query);
@@ -73,16 +103,25 @@
 			}
 		}
 
+		// страница администратора
 		public function show_admin_page() {
+			$query = "SELECT * FROM users where role = '0'";
+			$result = $this->connection->query($query);
+			while ($row = $result->fetch_array()){
+				$data[] = $row;
+			}
 			echo $this->renderer->render('admin_page.twig', array(
+				'name' => $data[0][4]
 			));
 		}
 
+		// личный кабинет врача
 		public function show_doc_page() {
 			echo $this->renderer->render('doc_page.twig', array(
 			));
 		}
 
+		// страница записавшихся студентов
 		public function show_schedule(){
 			$type = 1;
 			if (isset($_GET['type']))
@@ -101,7 +140,6 @@
 
 			$query = "SELECT * FROM raspisanie where type = $type";
 			$result = $this->connection->query($query);
-			//$data = $result->fetch_array();
 			while($row = $result->fetch_array()){
 				$data[] = $row;
 			}
@@ -111,6 +149,7 @@
 			));
 		}
 
+		// главная страница
 		public function showMainPage(){
 			$success = false;
 			if (isset($_GET['success']) && $_GET['success'] == 1)
@@ -120,12 +159,13 @@
 			));
 		}
 
+		// страница входа учётной записи
 		public function show_sign(){
 			echo $this->renderer->render('sign.twig', array());
 		}
 
 		public function editDocSchedule($str){
-			$query = "SELECT * FROM doc_schedule where type = 0"; // выбираем график врача(строка)
+			$query = "SELECT * FROM doc_schedule where type = 1"; // выбираем график врача(строка)
 			$result = $this->connection->query($query);
 			$row = $result->fetch_array();
 			$schedule_array = explode (",", $row['schedule']); // заводим в массив
@@ -134,6 +174,7 @@
 			echo $schedule_array[0];
 		}
 
+		// обработка данных для записи к врачу
 		public function save(){
 			if(isset($_POST['name']))
 				$name = $_POST['name'];
@@ -155,10 +196,11 @@
 			if ($this->connection->query($query) === TRUE) {
 			    header("location: /index.php?option=show&page=main&success=1");
 			} else {
-			    //echo "Error: " . $sql . "<br>" . $conn->error;
+			    echo "Ошибка при записи к врачу";
 			}
 		}
 	}
+
 	$option = "show";
 	if (isset($_GET['option']))
 		$option = $_GET['option'];
