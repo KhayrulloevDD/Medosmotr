@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,6 +21,12 @@
         <h5 class="float-right mt-2 mr-2">{{name}}</h5>
       </div>
     </nav>
+    
+    {% if success == true %}
+    <script>
+      alert("Добавлен новый врач!");
+    </script>
+    {% endif %}
 
     <h1 class="display 1 text-center mt-5 mb-5">Список доступных врачей</h1>  
     
@@ -31,6 +36,8 @@
         <thead>
           <tr>
             <th>№</th>
+            <th>Логин</th>
+            <th>Пароль</th>
             <th>ФИО</th>
             <th>Тип</th>
             <th>Описание</th>
@@ -39,6 +46,8 @@
         <tbody>
           <tr>
             <td>1</td>
+            <td>login</td>
+            <td>password</td>
             <td>Генадий Владимирович</td>
             <td>Эндокренолог</td>
             <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
@@ -67,8 +76,32 @@
           </button>
         </div>
         <!-- форма -->
-        <form class="form" id="myForm" role="form" method="post" action="index.php?option=save">
+        <form class="form" id="myForm" role="form" method="post" action="index.php?option=addDoc">
           <div class="modal-body">
+            <div class="form-group row">
+              <label for="login-input" class="col-2 col-form-label">Логин</label>
+              <div class="col-10">
+                <input class="form-control" name="login" type="text" placeholder="Логин для входа" id="login">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="password-input" class="col-2 col-form-label">Пароль</label>
+              <div class="col-10">
+                <input class="form-control" name="password" type="text" placeholder="Пароль" id="password">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="type1" class="col-2 col-form-label">Тип</label>
+              <div class="col-10">
+                <select class="form-control" name="type" id="type1">
+                  <option value="Терапевт">Терапевт</option>
+                  <option value="Окулист">Окулист</option>
+                  <option value="Венеролог">Венеролог</option>
+                  <option value="Невролог">Невролог</option>
+                  <option value="Нарколог">Нарколог</option>
+                </select>
+              </div>
+            </div>
             <div class="form-group row">
               <label for="text-input" class="col-2 col-form-label">ФИО</label>
               <div class="col-10">
@@ -76,20 +109,14 @@
               </div>
             </div>
             <div class="form-group row">
-              <label for="text-input" class="col-2 col-form-label">Тип</label>
-              <div class="col-10">
-                <input class="form-control" name="group" type="text" placeholder="Педиатр" id="type">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="email-input" class="col-2 col-form-label">Описание</label>
+              <label for="desc-input" class="col-2 col-form-label">Описание</label>
               <div class="col-10">
                 <input class="form-control" name="desc" type="text" placeholder="Добавьте описание" id="description">
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" id="submit" class="btn btn-primary">Подтвердить</button>
+            <button type="submit" id="submit2" class="btn btn-primary">Подтвердить</button>
           </div>
         </form>
       </div>

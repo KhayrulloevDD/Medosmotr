@@ -1,12 +1,19 @@
 <?php
 	require_once './vendor/autoload.php';
 
+	session_start();
+
 	class Application {
 
 		private $connection;
 		private $renderer;
 
 		public function __construct($option, $page){
+
+			if (isset($_SESSION['user_id'])){
+				//header("Location: /index.php?option=show&page=main");
+			}
+
 			$servername = "localhost";
 			$username = "root";
 			$password = "";
@@ -28,9 +35,8 @@
 						$this->showMainPage();
 						//$this->editDocSchedule("09:00");
 					}
-					if ($page == 'list'){
+					if ($page == 'list')
 						$this->show_schedule();
-					}
 					if ($page == 'sign')
 						$this->show_sign();
 					if ($page == 'admin_page')
@@ -55,26 +61,21 @@
 
 		// добавить нового врача с аккаунта администратора
 		public function addDoc(){
-			//Продолжать тут
+			if(isset($_POST['login']))
+				$login = $_POST['login'];
+			if(isset($_POST['password']))
+				$password = $_POST['password'];
+			if(isset($_POST['type']))
+				$type = $_POST['type'];
 			if(isset($_POST['name']))
 				$name = $_POST['name'];
-			if(isset($_POST['group']))
-				$group = $_POST['group'];
-			if(isset($_POST['email']))
-				$email = $_POST['email'];
-			if(isset($_POST['phone']))
-				$phone = $_POST['phone'];
-			if(isset($_POST['date']))
-				$date = $_POST['date'];
-			if(isset($_POST['time']))
-				$time = $_POST['time'];
-			if(isset($_POST['doc_type']))
-				$doc_type = $_POST['doc_type'];
+			if(isset($_POST['desc']))
+				$desc = $_POST['desc'];
 
-			$query = "INSERT into raspisanie (name, gr, email, phone, date, time, type) VALUES ('$name', '$group', '$email', '$phone', '$date', '$time', '$doc_type')";
+			$query = "INSERT into users (login, password, type, fullname, description) VALUES ('$login', '$password', '$type', '$name', '$desc')";
 
 			if ($this->connection->query($query) === TRUE) {
-			    header("location: /index.php?option=show&page=main&success=1");
+			    header("location: /index.php?option=show&page=admin_page&success=1");
 			} else {
 			    echo "Ошибка при записи к врачу";
 			}
@@ -93,6 +94,7 @@
 			}
 			else{
 				$user = $data[0];
+				$_SESSION['user_id'] = $user['id'];
 				if ($user['role'] == '0')
 					header('Location: ?option=show&page=admin_page');
 				else if ($user['role'] == '1')
@@ -111,13 +113,19 @@
 				$data[] = $row;
 			}
 			echo $this->renderer->render('admin_page.twig', array(
-				'name' => $data[0][4]
+				'name' => $data[$_SESSION['user_id'] - 1][5]
 			));
 		}
 
 		// личный кабинет врача
 		public function show_doc_page() {
+			$query = "SELECT * FROM users where role = '1'";
+			$result = $this->connection->query($query);
+			while ($row = $result->fetch_array()){
+				$data[] = $row;
+			}
 			echo $this->renderer->render('doc_page.twig', array(
+				'name' => $data[$_SESSION['user_id'] - 1][5]
 			));
 		}
 
