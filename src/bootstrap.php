@@ -1,4 +1,4 @@
 <?php
-	require_once 'classes/Sessions.php';
+	require_once 'classes/Session.php';
 
 ?>

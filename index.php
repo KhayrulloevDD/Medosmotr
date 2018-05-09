@@ -9,7 +9,12 @@
 		private $renderer;
 
 		public function __construct($option, $page){
-			$user = new Session();
+
+			/*$user = Session::instance();
+			$user->set('name', 'Любойчи');
+			var_dump($user->get('lastname'));
+			die();
+			*/
 			$servername = "localhost";
 			$username = "root";
 			$password = "";
@@ -80,24 +85,19 @@
 			$query = "SELECT * FROM users WHERE login = '$log' AND password = '$pass'";
 			$result = $this->connection->query($query);
 			$data = [];
-			while($row = $result->fetch_array()){
-				$data[] = $row;
-			}
+			if ($row = $result->fetch_array())
+				$data = $row;
 			if (count($data) == 0){
 				header('Location: ?option=show&page=sign');
 			}
 			else{
-				$user = $data[0];
-				$_SESSION['user_id'] = $user['id'];
-				// $user = Session::instance();
-				// $user->set('name', 'Khaydarov')
-				//
-
-			 // $user->get('name')
-				$_SESSION['user_name'] = $user['fullName'];
-				if ($user['role'] == '0')
+				$user = Session::instance();
+				$user->set('user_id',$data['id']);
+				$user->set('name',$data['fullName']);
+				$user->set('status',$data['role']); //status (админ, врач)
+				if ($user->get('status') == '0')
 					header('Location: ?option=show&page=admin_page');
-				else if ($user['role'] == '1')
+				else if ($user->get('status') == '1')
 					header('Location: ?option=show&page=doc_page');
 				else{
 					header('Location: ?option=show&page=sign');
@@ -107,15 +107,16 @@
 
 		// страница администратора
 		public function show_admin_page() {
+			//var_dump(Session::instance()->get('name'));
 			echo $this->renderer->render('admin_page.twig', array(
-				'name' => $_SESSION['user_name']
+				'name' => Session::instance()->get('name')
 			));
 		}
 
 		// личный кабинет врача
 		public function show_doc_page() {
 			echo $this->renderer->render('doc_page.twig', array(
-				'name' => $_SESSION['user_name']
+				'name' => Session::instance()->get('name')
 			));
 		}
 

@@ -1,25 +1,16 @@
 <?php
 
-	/**
-	 *
-	 */
 	Class Session {
 
-		/**
-		 *
-		 */
-		private $_instance = null;
+		private static $_instance = null;
 
-		/**
-		 * @private
-		 */
-		private __construct() {
+		private function __construct() {
 			session_start();
 		}
 
-		private __clone() {}
+		private function __clone() {}
 
-		private __sleep() {}
+		private function __sleep() {}
 
 		public static function instance() {
 			if (self::$_instance) {
