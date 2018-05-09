@@ -1,19 +1,17 @@
 <?php
 	require_once './vendor/autoload.php';
-
-	session_start();
-
+	//require_once './config/database.php';
+	require_once './src/bootstrap.php';
+	
 	class Application {
 
 		private $connection;
 		private $renderer;
 
 		public function __construct($option, $page){
-
-			if (isset($_SESSION['user_id'])){
-				//header("Location: /index.php?option=show&page=main");
-			}
-
+			$a = new Session();
+			var_dump($a);
+			die();
 			$servername = "localhost";
 			$username = "root";
 			$password = "";
@@ -31,10 +29,8 @@
 			}
 			switch ($option) {
 				case 'show':
-					if ($page == 'main'){
+					if ($page == 'main')
 						$this->showMainPage();
-						//$this->editDocSchedule("09:00");
-					}
 					if ($page == 'list')
 						$this->show_schedule();
 					if ($page == 'sign')
@@ -95,6 +91,7 @@
 			else{
 				$user = $data[0];
 				$_SESSION['user_id'] = $user['id'];
+				$_SESSION['user_name'] = $user['fullName'];
 				if ($user['role'] == '0')
 					header('Location: ?option=show&page=admin_page');
 				else if ($user['role'] == '1')
@@ -107,25 +104,15 @@
 
 		// страница администратора
 		public function show_admin_page() {
-			$query = "SELECT * FROM users where role = '0'";
-			$result = $this->connection->query($query);
-			while ($row = $result->fetch_array()){
-				$data[] = $row;
-			}
 			echo $this->renderer->render('admin_page.twig', array(
-				'name' => $data[$_SESSION['user_id'] - 1][5]
+				'name' => $_SESSION['user_name']
 			));
 		}
 
 		// личный кабинет врача
 		public function show_doc_page() {
-			$query = "SELECT * FROM users where role = '1'";
-			$result = $this->connection->query($query);
-			while ($row = $result->fetch_array()){
-				$data[] = $row;
-			}
 			echo $this->renderer->render('doc_page.twig', array(
-				'name' => $data[$_SESSION['user_id'] - 1][5]
+				'name' => $_SESSION['user_name']
 			));
 		}
 
