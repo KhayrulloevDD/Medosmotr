@@ -2,16 +2,14 @@
 	require_once './vendor/autoload.php';
 	//require_once './config/database.php';
 	require_once './src/bootstrap.php';
-	
+
 	class Application {
 
 		private $connection;
 		private $renderer;
 
 		public function __construct($option, $page){
-			$a = new Session();
-			var_dump($a);
-			die();
+			$user = new Session();
 			$servername = "localhost";
 			$username = "root";
 			$password = "";
@@ -43,7 +41,7 @@
 				case 'save':
 					$this->save();
 					break;
-				case 'login': 
+				case 'login':
 					$login = $_POST['name_login'];
 					$password = $_POST['name_password'];
 					$result = $this->auth($login, $password);
@@ -91,6 +89,11 @@
 			else{
 				$user = $data[0];
 				$_SESSION['user_id'] = $user['id'];
+				// $user = Session::instance();
+				// $user->set('name', 'Khaydarov')
+				//
+
+			 // $user->get('name')
 				$_SESSION['user_name'] = $user['fullName'];
 				if ($user['role'] == '0')
 					header('Location: ?option=show&page=admin_page');
