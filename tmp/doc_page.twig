@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title class="color">Врач</title>
+    <title class="color">{{name}}</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -23,14 +23,262 @@
       </div>
     </nav>
 
-    <h1 class="display 1 text-center">Страница Врача</h1>  
+    <h1 class="display 1 text-center mt-5 mb-5">График работы</h1>  
+    
 
-
-    <!-- контекст -->
+    <!-- контент -->
+    <div class="container">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">День</th>
+            <th scope="col">Время</th>
+            <th scope="col">Перерыв</th>
+            <th scope="col">Выходной</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Пн</td>
+            <td>
+              <select class="custom-select" name="select_mon_from">
+                <option selected>C</option>
+                <option value="8:30">8:30</option>
+                <option value="9:00">9:00</option>
+                <option value="10:00">10:00</option>
+              </select>
+              <span>-</span>
+              <select class="custom-select" name="select_mon_till">
+                <option selected>До</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+              </select>
+            </td>
+            <td>
+              <select class="custom-select" name="select_mon_break_from">
+                <option selected>C</option>
+                <option value="11:30">11:30</option>
+                <option value="12:30">12:30</option>
+                <option value="13:30">13:30</option>
+              </select>
+              <span>-</span>
+              <select class="custom-select" name="select_mon_break_till">
+                <option selected>До</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+              </select>
+            </td>
+            <td>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="checkbox_mon">
+                <span class="custom-control-indicator"></span>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Вт</td>
+            <td>
+              <select class="custom-select" name="select_tue_from">
+                <option selected>C</option>
+                <option value="8:30">8:30</option>
+                <option value="9:00">9:00</option>
+                <option value="10:00">10:00</option>
+              </select>
+              <span>-</span>
+              <select class="custom-select" name="select_tue_till">
+                <option selected>До</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+              </select>
+            </td>
+            <td>
+              <select class="custom-select" name="select_tue_break_from">
+                <option selected>C</option>
+                <option value="11:30">11:30</option>
+                <option value="12:30">12:30</option>
+                <option value="13:30">13:30</option>
+              </select>
+              <span>-</span>
+              <select class="custom-select" name="select_tue_break_till">
+                <option selected>До</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+              </select>
+            </td>
+            <td>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="checkbox_tue">
+                <span class="custom-control-indicator"></span>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Ср</td>
+            <td>
+              <select class="custom-select" name="select_wed_from">
+                <option selected>C</option>
+                <option value="8:30">8:30</option>
+                <option value="9:00">9:00</option>
+                <option value="10:00">10:00</option>
+              </select>
+              <span>-</span>
+              <select class="custom-select" name="select_wed_till">
+                <option selected>До</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+              </select>
+            </td>
+            <td>
+              <select class="custom-select" name="select_wed_break_from">
+                <option selected>C</option>
+                <option value="11:30">11:30</option>
+                <option value="12:30">12:30</option>
+                <option value="13:30">13:30</option>
+              </select>
+              <span>-</span>
+              <select class="custom-select" name="select_wed_break_till">
+                <option selected>До</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+              </select>
+            </td>
+            <td>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="checkbox_wed">
+                <span class="custom-control-indicator"></span>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Чт</td>
+            <td>
+              <select class="custom-select" name="select_thur_from">
+                <option selected>C</option>
+                <option value="8:30">8:30</option>
+                <option value="9:00">9:00</option>
+                <option value="10:00">10:00</option>
+              </select>
+              <span>-</span>
+              <select class="custom-select" name="select_thur_till">
+                <option selected>До</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+              </select>
+            </td>
+            <td>
+              <select class="custom-select" name="select_thur_break_from">
+                <option selected>C</option>
+                <option value="11:30">11:30</option>
+                <option value="12:30">12:30</option>
+                <option value="13:30">13:30</option>
+              </select>
+              <span>-</span>
+              <select class="custom-select" name="select_thur_break_till">
+                <option selected>До</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+              </select>
+            </td>
+            <td>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="checkbox_thur">
+                <span class="custom-control-indicator"></span>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Пт</td>
+            <td>
+              <select class="custom-select" name="select_fri_from">
+                <option selected>C</option>
+                <option value="8:30">8:30</option>
+                <option value="9:00">9:00</option>
+                <option value="10:00">10:00</option>
+              </select>
+              <span>-</span>
+              <select class="custom-select" name="select_fri_till">
+                <option selected>До</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+              </select>
+            </td>
+            <td>
+              <select class="custom-select" name="select_fri_break_from">
+                <option selected>C</option>
+                <option value="11:30">11:30</option>
+                <option value="12:30">12:30</option>
+                <option value="13:30">13:30</option>
+              </select>
+              <span>-</span>
+              <select class="custom-select" name="select_fri_break_till">
+                <option selected>До</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+              </select>
+            </td>
+            <td>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="checkbox_fri">
+                <span class="custom-control-indicator"></span>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Сб</td>
+            <td>
+              <select class="custom-select" name="select_sat_from">
+                <option selected>C</option>
+                <option value="8:30">8:30</option>
+                <option value="9:00">9:00</option>
+                <option value="10:00">10:00</option>
+              </select>
+              <span>-</span>
+              <select class="custom-select" name="select_sat_till">
+                <option selected>До</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+              </select>
+            </td>
+            <td>
+              <select class="custom-select" name="select_sat_break_from">
+                <option selected>C</option>
+                <option value="11:30">11:30</option>
+                <option value="12:30">12:30</option>
+                <option value="13:30">13:30</option>
+              </select>
+              <span>-</span>
+              <select class="custom-select" name="select_sat_break_till">
+                <option selected>До</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+              </select>
+            </td>
+            <td>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="checkbox_sat">
+                <span class="custom-control-indicator"></span>
+              </label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     
     
     <div class="container text-right">
-      <input type="button" class="btn btn-primary" value="Назад" onClick='location.href="index.php"'>
+      <input type="button" class="btn btn-primary" value="Сохранить" onClick='№'>
     </div>
 
     <footer class="footer">
