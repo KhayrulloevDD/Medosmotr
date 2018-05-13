@@ -29,5 +29,8 @@
 			$_SESSION[$key] = $value;
 			return true;
 		}
+		public function destroy(){
+			session_destroy();
+		}
 	}
 ?>

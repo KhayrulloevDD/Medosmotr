@@ -17,7 +17,7 @@
           <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
           Медосмотр
         </a>
-        <input type="button" class="btn btn-primary float-right" value="Выйти" onClick='location.href="index.php?option=show&page=main"'>
+        <input type="button" class="btn btn-primary float-right" value="Выйти" onClick='location.href="index.php?option=logout"'>
         <h5 class="float-right mt-2 mr-2">{{name}}</h5>
       </div>
     </nav>
@@ -29,7 +29,7 @@
     {% endif %}
 
     <h1 class="display 1 text-center mt-5 mb-5">Список доступных врачей</h1>  
-    
+    <!-- Добавить удаление -->
     <!-- контент -->
     <div class="container">
       <table class="table table-striped">
@@ -44,14 +44,18 @@
           </tr>
         </thead>
         <tbody>
+          {% set counter = 0 %}
+          {% for row in docData %}
+          {% set counter = counter + 1 %}
           <tr>
-            <td>1</td>
-            <td>login</td>
-            <td>password</td>
-            <td>Генадий Владимирович</td>
-            <td>Эндокренолог</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
+            <td>{{counter}}</td>
+            <td>{{row.login}}</td>
+            <td>{{row.password}}</td>
+            <td>{{row.fullName}}</td>
+            <td>{{row.type}}</td>
+            <td>{{row.description}}</td>
           </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>

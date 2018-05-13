@@ -10,11 +10,6 @@
 
 		public function __construct($option, $page){
 
-			/*$user = Session::instance();
-			$user->set('name', 'Любойчи');
-			var_dump($user->get('lastname'));
-			die();
-			*/
 			$servername = "localhost";
 			$username = "root";
 			$password = "";
@@ -30,6 +25,7 @@
 			if ($this->connection->connect_error) {
 			    die("Connection failed: " . $this->connection->connect_error);
 			}
+			//$db = Database::instance();
 			switch ($option) {
 				case 'show':
 					if ($page == 'main')
@@ -51,8 +47,12 @@
 					$password = $_POST['name_password'];
 					$result = $this->auth($login, $password);
 					break;
+				case 'logout':
+					$this->logout();
+					break;
 				case 'addDoc':
 					$this->addDoc();
+					break;
 				default:
 					break;
 			}
@@ -105,11 +105,23 @@
 			}
 		}
 
+		//выход
+		public function logout(){
+			Session::instance()->destroy();
+			header('Location: ?option=show&page=sign');
+		}
+
 		// страница администратора
 		public function show_admin_page() {
-			//var_dump(Session::instance()->get('name'));
+			$query = "SELECT * FROM users where role = '1'";
+			$result = $this->connection->query($query);
+			while($row = $result->fetch_array()){
+				$data[] = $row;
+			}
+
 			echo $this->renderer->render('admin_page.twig', array(
-				'name' => Session::instance()->get('name')
+				'name' => Session::instance()->get('name'),
+				'docData' => $data
 			));
 		}
 
@@ -150,27 +162,24 @@
 
 		// главная страница
 		public function showMainPage(){
+			$user = Session::instance();
+			$id = $user->get('id');
+			$name = $user->get('name');
+			$status = $user->get('status');
 			$success = false;
 			if (isset($_GET['success']) && $_GET['success'] == 1)
 				$success = true;
 			echo $this->renderer->render('main.twig', array(
-				'success'=> $success
+				'id' => $id,
+				'success'=> $success,
+				'name' => $name,
+				'status' => $status
 			));
 		}
 
 		// страница входа учётной записи
 		public function show_sign(){
 			echo $this->renderer->render('sign.twig', array());
-		}
-
-		public function editDocSchedule($str){
-			$query = "SELECT * FROM doc_schedule where type = 1"; // выбираем график врача(строка)
-			$result = $this->connection->query($query);
-			$row = $result->fetch_array();
-			$schedule_array = explode (",", $row['schedule']); // заводим в массив
-			if (in_array($str, $schedule_array))
-				echo "Данное время уже есть в графике приёма врача!";
-			echo $schedule_array[0];
 		}
 
 		// обработка данных для записи к врачу
