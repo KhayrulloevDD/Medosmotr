@@ -18,18 +18,11 @@
           Медосмотр
         </a>
         <input type="button" class="btn btn-primary float-right" value="Выйти" onClick='location.href="index.php?option=logout"'>
-        <h5 class="float-right mt-2 mr-2">{{name}}</h5>
+        <a class="color" href=""><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
       </div>
     </nav>
     
-    {% if success == true %}
-    <script>
-      alert("Добавлен новый врач!");
-    </script>
-    {% endif %}
-
-    <h1 class="display 1 text-center mt-5 mb-5">Список доступных врачей</h1>  
-    <!-- Добавить удаление -->
+    <h1 class="display 1 text-center mt-5 mb-5">Список доступных врачей</h1>
     <!-- контент -->
     <div class="container">
       <table class="table table-striped">
@@ -54,10 +47,32 @@
             <td>{{row.fullName}}</td>
             <td>{{row.type}}</td>
             <td>{{row.description}}</td>
+            <td><a href="index.php?option=deleteDoc&login={{row.login}}" data-toggle="modal" data-target="#exampleModal">Удалить</a></td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
+    </div>
+    
+    <!-- модальное окно при удалении -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Удалить врача?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Вы действительно хотите удалить из базы врача?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+            <button type="submit" class="btn btn-primary"><a class="color" href="index.php?option=deleteDoc&login={{row.login}}">Подтвердить</a></button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <footer class="footer">

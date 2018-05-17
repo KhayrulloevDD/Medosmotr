@@ -53,6 +53,10 @@
 				case 'addDoc':
 					$this->addDoc();
 					break;
+				case 'deleteDoc':
+					$login = $_GET['login'];
+					$this->deleteDoc($login);
+					break;
 				default:
 					break;
 			}
@@ -74,10 +78,18 @@
 			$query = "INSERT into users (login, password, type, fullname, description) VALUES ('$login', '$password', '$type', '$name', '$desc')";
 
 			if ($this->connection->query($query) === TRUE) {
-			    header("location: /index.php?option=show&page=admin_page&success=1");
+			    header("location: /index.php?option=show&page=admin_page");
 			} else {
-			    echo "Ошибка при записи к врачу";
+			    echo "Ошибка при добавления врача!";
 			}
+		}
+
+		public function deleteDoc($login){
+			$query = "DELETE FROM users WHERE login = '$login'";
+			if ($this->connection->query($query) == true)
+				header('Location: ?option=show&page=admin_page');
+			else
+				echo "Ошибка при удалении врача!";
 		}
 
 		// авторизация
@@ -127,8 +139,15 @@
 
 		// личный кабинет врача
 		public function show_doc_page() {
+			$id = Session::instance()->get('user_id');
+			$query = "SELECT * FROM raspisanie where type = '$id'";
+			$result = $this->connection->query($query);
+			while($row = $result->fetch_array()){
+				$data[] = $row;
+			}
 			echo $this->renderer->render('doc_page.twig', array(
-				'name' => Session::instance()->get('name')
+				'name' => Session::instance()->get('name'),
+				'schedule' => $data
 			));
 		}
 
@@ -137,26 +156,19 @@
 			$type = 1;
 			if (isset($_GET['type']))
 				$type = $_GET['type'];
-
-			if ($type == 1)
-				$doc_name = "Терапевту";
-			if ($type == 2)
-				$doc_name = "Окулисту";
-			if ($type == 3)
-				$doc_name = "Венерологу";
-			if ($type == 4)
-				$doc_name = "Неврологу";
-			if ($type == 5)
-				$doc_name = "Наркологу";
-
+			$data = [];
+			$data2 = [];
 			$query = "SELECT * FROM raspisanie where type = $type";
 			$result = $this->connection->query($query);
 			while($row = $result->fetch_array()){
 				$data[] = $row;
 			}
+			$query = "SELECT * FROM users where id = $type";
+			$result = $this->connection->query($query);
+			$data2 = $result->fetch_array();
 			echo $this->renderer->render('list.twig', array(
 				'schedule'=> $data,
-				'doc_name'=> $doc_name
+				'doctor'=> $data2,
 			));
 		}
 
@@ -169,11 +181,18 @@
 			$success = false;
 			if (isset($_GET['success']) && $_GET['success'] == 1)
 				$success = true;
+			$data = [];
+			$query = "SELECT * FROM users where role = 1";
+			$result = $this->connection->query($query);
+			while($row = $result->fetch_array()){
+				$data[] = $row;
+			}
 			echo $this->renderer->render('main.twig', array(
 				'id' => $id,
 				'success'=> $success,
 				'name' => $name,
-				'status' => $status
+				'status' => $status,
+				'docs' => $data
 			));
 		}
 
