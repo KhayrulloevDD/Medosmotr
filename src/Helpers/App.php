@@ -9,7 +9,10 @@ class App
     public static function fireRequest($method, $request)
     {
         $dispatcher = \FastRoute\simpleDispatcher(function(\FastRoute\RouteCollector $r) {
-            $r->addRoute('GET', '/', ['Index' => 'main']);
+            $routes = require(ROOT . '/src/routes.php');
+            foreach ($routes as $route) {
+                $r->addRoute($route[0], $route[1], $route[2]);
+            }
         });
 
         $routeInfo = $dispatcher->dispatch($method, $request);
@@ -24,12 +27,13 @@ class App
                 $handler = $routeInfo[1];
                 $vars = $routeInfo[2];
 
+
                 $controllers = array_keys($handler);
                 $methods = array_values($handler);
 
                 $class = '\\App\\Controllers\\' . $controllers[0];
                 $method = $methods[0];
-                $run = (new $class)->$method();
+                $run = (new $class)->$method(...array_values($vars));
                 break;
         }
     }

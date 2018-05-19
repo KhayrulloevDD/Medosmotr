@@ -1,5 +1,7 @@
 <?php
 
+namespace Helpers;
+
 Class Session {
 
 	private static $_instance = null;
