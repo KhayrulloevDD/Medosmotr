@@ -8,18 +8,18 @@ use \Helpers\Session;
 
 class Index extends preDispatch
 {
-    public function main($user)
+    public function main()
     {
         /** Example */
-        $user = new User();
-        $user->login = 'Dodullo';
-        $user->password = 'admin';
-        $user->username = 'Khayrullozoda';
-        $user->save();
+//        $user = new User();
+//        $user->login = 'Dodullo';
+//        $user->password = 'admin';
+//        $user->username = 'Khayrulloev';
+//        $user->save();
 
         /** Example */
-        $session = Session::instance();
-        $session->get('user_id');
+//        $session = Session::instance();
+//        $session->get('user_id');
 
         echo $this->renderer->render('main.twig', []);
     }

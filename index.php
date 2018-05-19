@@ -11,9 +11,6 @@ $request = Request::createFromGlobals();
 $method = $request->server->get('REQUEST_METHOD');
 $uri = $request->getRequestUri();
 
-// переключаемся на пользовательский обработчик
-$old_error_handler = set_error_handler("myErrorHandler");
-
 App::fireRequest($method, $uri);
 
 $response = Response::create();

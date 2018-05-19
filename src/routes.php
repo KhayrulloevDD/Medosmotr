@@ -5,5 +5,7 @@ return [
     ['GET', '/{user}/me', ['Index' => 'main']],
 
     // Other routes
-    ['GET', '/', ['Index' => 'main']]
+    ['GET', '/', ['Index' => 'main']],
+
+    ['GET', '/login', ['Auth' => 'login']]
 ];
