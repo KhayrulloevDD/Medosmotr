@@ -24,16 +24,13 @@ class preDispatch
         $this->renderer = new \Twig_Environment($loader, array('debug'=> true));
         $this->renderer->addExtension(new \Twig_Extension_Debug());
 
-//      Initialize Database connection
-//        $servername = "localhost";
-//        $username = "root";
-//        $password = "";
-//        $dbname = "medosmotr";
+        // Initialize Database connection
+        $dbConfig = require (ROOT . '/config/database.php');
 
-//      Create connection
-//        $this->db = new \mysqli($servername, $username, $password, $dbname);
+        // Create connection
+//        $this->db = new \mysqli($dbConfig['host'], $dbConfig['user'], $dbConfig['password'], $dbConfig['dbname']);
 
-//      Check db
+        // Check db
 //        if ($this->db->connect_error) {
 //            die("Connection failed: " . $this->db->connect_error);
 //        }
