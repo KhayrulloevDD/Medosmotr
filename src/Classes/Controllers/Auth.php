@@ -23,12 +23,14 @@ class Auth extends preDispatch
 
         // User is not exists
         if (!$user->exists) {
-            // @todo
+            var_dump("net user");
+            die();
         } else {
             $session = Session::instance();
             $session->set('user_id', $user->id);
-            $session->set('user_name', $user->username);
+            $session->set('user_name', $user->fullName);
             $session->set('user_role', $user->role);
+            header("location: /adminPage");
         }
 
     }

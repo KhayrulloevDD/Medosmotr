@@ -6,15 +6,17 @@ class User extends Base
 {
     public $id;
 
-    public $username;
-
-    public $photo;
-
-    public $role;
-
     public $login;
 
     public $password;
+
+    public $type;
+
+    public $role;
+
+    public $fullName;
+
+    public $description;
 
     public $exists = false;
 
@@ -35,38 +37,43 @@ class User extends Base
         if (!empty($data)) {
             $this->exists = true;
 
-            $this->username = $data['username'];
-            $this->photo = $data['photo'];
+            $this->id = $data['id'];
+            $this->fullName = $data['fullName'];
             $this->login = $data['login'];
             $this->password = $data['password'];
             $this->role = $data['role'];
+            $this->type = $data['type'];
+            $this->description = $data['description'];
         }
     }
 
     public function getByLoginAndPassword($login, $password)
     {
-        $query = "SELECT * FROM users WHERE login = {$login} AND password = {$password}";
+        $query = "SELECT * FROM users WHERE login = '$login' AND password = '$password'";
         $result = $this->db->query($query)->fetch_array();
         if (!empty($result)) {
             $this->exists = true;
 
-            $this->username = $result['username'];
-            $this->photo    = $result['photo'];
-            $this->login    = $result['login'];
+            $this->id = $result['id'];
+            $this->fullName = $result['fullName'];
+            $this->login = $result['login'];
             $this->password = $result['password'];
-            $this->role     = $result['role'];
+            $this->role = $result['role'];
+            $this->type = $result['type'];
+            $this->description = $result['description'];
         }
     }
 
-    public function remove()
+    public function remove($login)
     {
-        // @todo remove user with current id
+        $query = "DELETE FROM users where login = '$login'";
+        $this->db->query($query);
     }
 
     public function save()
     {
-        // @todo save new user or update existed
+        $query = "INSERT INTO users (fullName, login, password, role, type, description) VALUES ('$this->fullName', '$this->login', '$this->password', '$this->role', '$this->type', '$this->description')";
+        $this->db->query($query);
     }
-
 
 }

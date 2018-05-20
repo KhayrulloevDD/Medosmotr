@@ -4,9 +4,6 @@ namespace App\Models;
 
 class Base
 {
-    /**
-     * @var $db
-     */
     protected $db;
 
     public function __construct()

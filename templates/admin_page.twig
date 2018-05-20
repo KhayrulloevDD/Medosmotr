@@ -47,7 +47,7 @@
             <td>{{row.fullName}}</td>
             <td>{{row.type}}</td>
             <td>{{row.description}}</td>
-            <td><a href="index.php?option=deleteDoc&login={{row.login}}" data-toggle="modal" data-target="#exampleModal">Удалить</a></td>
+            <td><a href="/user/{{row.login}}/delete" data-toggle="modal" data-target="#exampleModal">Удалить</a></td>
           </tr>
           {% endfor %}
         </tbody>
@@ -95,7 +95,7 @@
           </button>
         </div>
         <!-- форма -->
-        <form class="form" id="myForm" role="form" method="post" action="index.php?option=addDoc">
+        <form class="form" id="myForm" role="form" method="post" action="/user/save">
           <div class="modal-body">
             <div class="form-group row">
               <label for="login-input" class="col-2 col-form-label">Логин</label>

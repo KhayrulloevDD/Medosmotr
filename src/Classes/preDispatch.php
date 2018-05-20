@@ -6,19 +6,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class preDispatch
 {
-    /**
-     * @var $renderer
-     */
     protected $renderer;
 
-    /**
-     * @var $request
-     */
     protected $request;
 
-    /**
-     * preDispatch constructor.
-     */
+    //preDispatch constructor
     public function __construct()
     {
         // initialize Twig

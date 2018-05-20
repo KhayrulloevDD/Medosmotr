@@ -6,9 +6,6 @@ Class Session {
 
 	private static $_instance = null;
 
-	/**
-	 * @private
-	 */
 	private function __construct() {
 		session_start();
 	}
