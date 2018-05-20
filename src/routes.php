@@ -2,10 +2,8 @@
 
 return [
     // Main page
-    ['GET', '/{user}/me', ['Index' => 'main']],
+    ['GET', '/', ['Index' => 'main']],
 
-    // Other routes
-    ['GET', '/?me=1', ['Index' => 'main']],
-
-    ['GET', '/login', ['Auth' => 'login']]
+    ['GET', '/signin', ['Auth' => 'signin']],
+    ['POST', '/auth', ['Auth' => 'login']],
 ];

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-class User
+class User extends Base
 {
+    public $id;
+
     public $username;
 
     public $photo;
@@ -14,11 +16,44 @@ class User
 
     public $password;
 
-    public function __construct($id = '') {}
+    public $exists = false;
 
-    public static function get($id)
+    public function __construct($id = '') {
+        parent::__construct();
+        $this->get($id);
+    }
+
+    public function get($id) {
+        $query = "SELECT * FROM users WHERE id = {$id} LIMIT 1";
+        $result = $this->db->query($query);
+        $data = $result->fetch_array();
+
+        if (!empty($data)) {
+            $this->exists = true;
+
+            $this->username = $data['username'];
+            $this->photo = $data['photo'];
+            $this->login = $data['login'];
+            $this->password = $data['password'];
+            $this->role = $data['role'];
+        }
+    }
+
+    public function getByLoginAndPassword($login, $password)
     {
-        return new self();
+        $query = "SELECT * FROM users WHERE login = {$login} AND password = {$password}";
+        $result = $this->db->query($query);
+        $data = $result->fetch_array();
+
+        if (!empty($data)) {
+            $this->exists = true;
+
+            $this->username = $data['username'];
+            $this->photo = $data['photo'];
+            $this->login = $data['login'];
+            $this->password = $data['password'];
+            $this->role = $data['role'];
+        }
     }
 
     public function remove()
@@ -30,4 +65,6 @@ class User
     {
         // @todo save new user or update existed
     }
+
+
 }

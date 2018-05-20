@@ -10,19 +10,9 @@ class Index extends preDispatch
 {
     public function main()
     {
-        echo $this->request->query->get('me');
-        die;
-        /** Example */
-//        $user = new User();
-//        $user->login = 'Dodullo';
-//        $user->password = 'admin';
-//        $user->username = 'Khayrulloev';
-//        $user->save();
-
-        /** Example */
-//        $session = Session::instance();
-//        $session->get('user_id');
-
-        echo $this->renderer->render('main.twig', []);
+        $success = $this->request->query->get('success') ?: false;
+        echo $this->renderer->render('main.twig', array(
+            'success'=> $success
+        ));
     }
 }

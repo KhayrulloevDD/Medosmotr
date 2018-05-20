@@ -9,7 +9,7 @@ require_once './app/install.php';
 $request = Request::createFromGlobals();
 
 $method = $request->server->get('REQUEST_METHOD');
-$uri = $request->getRequestUri();
+$uri = parse_url($request->getRequestUri(), PHP_URL_PATH);
 
 App::fireRequest($method, $uri);
 
