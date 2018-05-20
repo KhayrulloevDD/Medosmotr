@@ -7,7 +7,7 @@
     <title class="color">Медосмотр</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
 
   </head>
   <body>
@@ -18,6 +18,16 @@
           <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
           Медосмотр
         </a>
+        {% if name != '' %}
+            <input type="button" class="btn btn-primary float-right" value="Выйти" onClick='location.href="index.php?option=logout"'>
+            {% if status == '0' %}
+              <a class="color" href="http://localhost/index.php?option=show&page=admin_page"><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
+            {% elseif status == '1' %}
+              <a class="color" href="http://localhost/index.php?option=show&page=doc_page"><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
+            {% endif %}
+        {% else %}
+            <input type="button" class="btn btn-primary float-right" value="Вход" onClick='location.href="/signin"'>
+        {% endif %}
       </div>
     </nav>
     
@@ -29,15 +39,16 @@
 
     <div class="container mt-3">
       <div class="row">
+        {% for row in docs %}
         <div class="col-lg-4 col-md-6 col-sm-12 mb-3 d-flex align-items-stretch">
           <div class="card">
             <img class="card-img-top img-fluid" src="images/1.png" alt="Card image cap">
             <div class="card-block">
-              <h4 class="card-title">Терапевт</h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas quis quo, aperiam temporibus natus voluptates.</p>
+              <h4 class="card-title">{{row.type}}</h4>
+              <p class="card-text">{{row.description}}.</p>
               <!-- кнопка вызова модального окна -->
-              <button type="button" class="btn btn-primary getdoctype" data-id="0" data-toggle="modal" data-target="#exampleModalLive">Записаться</button>
-              <input type="button" class="btn btn-primary ml-3" value="Расписание" onClick='location.href="index.php?option=show&page=list&type=0"'>
+              <button type="button" class="btn btn-primary getdoctype" data-id="{{row.id}}" data-toggle="modal" data-target="#exampleModalLive">Записаться</button>
+              <input type="button" class="btn btn-primary ml-3" value="Расписание" onClick='location.href="index.php?option=show&page=list&type={{row.id}}"'>
               <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
               
               <div class="modal-dialog" role="document">
@@ -111,66 +122,7 @@
             </div>
           </div>
         </div>
-
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-3 d-flex align-items-stretch">
-          <div class="card">
-            <img class="card-img-top img-fluid" src="images/1.png" alt="Card image cap">
-            <div class="card-block">
-              <h4 class="card-title">Окулист</h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas quis quo, aperiam temporibus natus voluptates.</p>
-              <!-- кнопка вызова модального окна -->
-              <button type="button" class="btn btn-primary getdoctype" data-id="1" data-toggle="modal" data-target="#exampleModalLive">Записаться</button>
-              <input type="button" class="btn btn-primary ml-3" value="Расписание" onClick='location.href="index.php?option=show&page=list&type=1"'>
-              <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-3 d-flex align-items-stretch">
-          <div class="card">
-            <img class="card-img-top img-fluid" src="images/1.png" alt="Card image cap">
-            <div class="card-block">
-              <h4 class="card-title">Венеролог</h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas quis quo, aperiam temporibus natus voluptates.</p>
-              <!-- кнопка вызова модального окна -->
-              <button type="button" class="btn btn-primary getdoctype" data-id="2" data-toggle="modal" data-target="#exampleModalLive">Записаться</button>
-              <input type="button" class="btn btn-primary ml-3" value="Расписание" onClick='location.href="index.php?option=show&page=list&type=2"'>
-              <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-3 d-flex align-items-stretch">
-          <div class="card">
-            <img class="card-img-top img-fluid" src="images/1.png" alt="Card image cap">
-            <div class="card-block">
-              <h4 class="card-title">Невролог</h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas quis quo, aperiam temporibus natus voluptates.</p>
-              <!-- кнопка вызова модального окна -->
-              <button type="button" class="btn btn-primary getdoctype" data-id="3" data-toggle="modal" data-target="#exampleModalLive">Записаться</button>
-              <input type="button" class="btn btn-primary ml-3" value="Расписание" onClick='location.href="index.php?option=show&page=list&type=3"'>
-              <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-3 d-flex align-items-stretch">
-          <div class="card">
-            <img class="card-img-top img-fluid" src="images/1.png" alt="Card image cap">
-            <div class="card-block">
-              <h4 class="card-title">Нарколог</h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas quis quo, aperiam temporibus natus voluptates.</p>
-              <!-- кнопка вызова модального окна -->
-              <button type="button" class="btn btn-primary getdoctype" data-id="4" data-toggle="modal" data-target="#exampleModalLive">Записаться</button>
-              <input type="button" class="btn btn-primary ml-3" value="Расписание" onClick='location.href="index.php?option=show&page=list&type=4"'>
-              <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
-              </div>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>  
 
@@ -179,18 +131,16 @@
         <span class="text-muted">УрфУ 2018</span>
       </div>
     </footer>
-
     
-
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/additional-methods.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script src="js/validating.js"></script>
+    <script src="/static/js/validating.js"></script>
 
-    <script src="js/define_type.js" type="text/javascript"></script>
+    <script src="/static/js/define_type.js" type="text/javascript"></script>
 
   </body>
 </html>

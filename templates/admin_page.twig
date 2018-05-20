@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title class="color">Администратор</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-faded nav-bg color">
+      <div class="container">
+        <a class="navbar-brand color" href="index.php">
+          <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          Медосмотр
+        </a>
+        <input type="button" class="btn btn-primary float-right" value="Выйти" onClick='location.href="index.php?option=logout"'>
+        <a class="color" href=""><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
+      </div>
+    </nav>
+    
+    <h1 class="display 1 text-center mt-5 mb-5">Список доступных врачей</h1>
+    <!-- контент -->
+    <div class="container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>Логин</th>
+            <th>Пароль</th>
+            <th>ФИО</th>
+            <th>Тип</th>
+            <th>Описание</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% set counter = 0 %}
+          {% for row in docData %}
+          {% set counter = counter + 1 %}
+          <tr>
+            <td>{{counter}}</td>
+            <td>{{row.login}}</td>
+            <td>{{row.password}}</td>
+            <td>{{row.fullName}}</td>
+            <td>{{row.type}}</td>
+            <td>{{row.description}}</td>
+            <td><a href="/user/{{row.login}}/delete" data-toggle="modal" data-target="#exampleModal">Удалить</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- модальное окно при удалении -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Удалить врача?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Вы действительно хотите удалить из базы врача?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+            <button type="submit" class="btn btn-primary"><a class="color" href="index.php?option=deleteDoc&login={{row.login}}">Подтвердить</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container text-center">
+        <span class="text-muted">УрфУ 2018</span>
+      </div>
+    </footer>
+    
+    <div class="container text-right">
+      <button type="button" class="btn btn-primary" data-id="0" data-toggle="modal" data-target="#addDoc">Добавить</button>
+    </div>
+    <div id="addDoc" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addDocLabel" aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLiveLabel">Добавить нового врача:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!-- форма -->
+        <form class="form" id="myForm" role="form" method="post" action="/user/save">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="login-input" class="col-2 col-form-label">Логин</label>
+              <div class="col-10">
+                <input class="form-control" name="login" type="text" placeholder="Логин для входа" id="login">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="password-input" class="col-2 col-form-label">Пароль</label>
+              <div class="col-10">
+                <input class="form-control" name="password" type="text" placeholder="Пароль" id="password">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="type1" class="col-2 col-form-label">Тип</label>
+              <div class="col-10">
+                <select class="form-control" name="type" id="type1">
+                  <option value="Терапевт">Терапевт</option>
+                  <option value="Окулист">Окулист</option>
+                  <option value="Венеролог">Венеролог</option>
+                  <option value="Невролог">Невролог</option>
+                  <option value="Нарколог">Нарколог</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="text-input" class="col-2 col-form-label">ФИО</label>
+              <div class="col-10">
+                <input class="form-control" name="name" type="text" placeholder="Иванов Иван Иванович" id="name">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="desc-input" class="col-2 col-form-label">Описание</label>
+              <div class="col-10">
+                <input class="form-control" name="desc" type="text" placeholder="Добавьте описание" id="description">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" id="submit2" class="btn btn-primary">Подтвердить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/additional-methods.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="js/validating.js"></script>
+  </body>
+</html>
