@@ -10,6 +10,8 @@ class Index extends preDispatch
 {
     public function main()
     {
+        echo $this->request->query->get('me');
+        die;
         /** Example */
 //        $user = new User();
 //        $user->login = 'Dodullo';

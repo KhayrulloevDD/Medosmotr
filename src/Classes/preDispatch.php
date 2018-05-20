@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Symfony\Component\HttpFoundation\Request;
+
 class preDispatch
 {
     /**
@@ -13,6 +15,11 @@ class preDispatch
      * @var $db
      */
     protected $db;
+
+    /**
+     * @var $request
+     */
+    protected $request;
 
     /**
      * preDispatch constructor.
@@ -34,5 +41,7 @@ class preDispatch
 //        if ($this->db->connect_error) {
 //            die("Connection failed: " . $this->db->connect_error);
 //        }
+
+        $this->request = Request::createFromGlobals();
     }
 }
