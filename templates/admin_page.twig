@@ -13,11 +13,11 @@
   <body>
     <nav class="navbar navbar-dark bg-faded nav-bg color">
       <div class="container">
-        <a class="navbar-brand color" href="index.php">
+        <a class="navbar-brand color" href="/">
           <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
           Медосмотр
         </a>
-        <input type="button" class="btn btn-primary float-right" value="Выйти" onClick='location.href="index.php?option=logout"'>
+        <input type="button" class="btn btn-primary float-right" value="Выйти" onClick='/signin"'>
         <a class="color" href=""><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
       </div>
     </nav>
@@ -47,7 +47,7 @@
             <td>{{row.fullName}}</td>
             <td>{{row.type}}</td>
             <td>{{row.description}}</td>
-            <td><a href="/user/{{row.login}}/delete" data-toggle="modal" data-target="#exampleModal">Удалить</a></td>
+            <td><a href="/user/{{row.login}}/deleteDoc" data-toggle="modal" data-target="#exampleModal">Удалить</a></td>
           </tr>
           {% endfor %}
         </tbody>
@@ -69,7 +69,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
-            <button type="submit" class="btn btn-primary"><a class="color" href="index.php?option=deleteDoc&login={{row.login}}">Подтвердить</a></button>
+            <button type="submit" class="btn btn-primary"><a class="color" href="/user/{{row.login}}/deleteDoc">Подтвердить</a></button>
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@
           </button>
         </div>
         <!-- форма -->
-        <form class="form" id="myForm" role="form" method="post" action="/user/save">
+        <form class="form" id="myForm" role="form" method="post" action="/user/addDoc">
           <div class="modal-body">
             <div class="form-group row">
               <label for="login-input" class="col-2 col-form-label">Логин</label>

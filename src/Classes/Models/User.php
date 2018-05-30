@@ -5,22 +5,16 @@ namespace App\Models;
 class User extends Base
 {
     public $id;
-
     public $login;
-
     public $password;
-
     public $type;
-
     public $role;
-
     public $fullName;
-
     public $description;
 
     public $exists = false;
 
-    public function __construct($id = '') {
+    public function __construct($id = ''){
         parent::__construct();
 
         if (trim($id)) {
@@ -29,7 +23,7 @@ class User extends Base
 
     }
 
-    public function get($id) {
+    public function get($id){
         $query = "SELECT * FROM users WHERE id = $id LIMIT 1";
         $result = $this->db->query($query);
         $data = $result->fetch_array();
@@ -47,8 +41,7 @@ class User extends Base
         }
     }
 
-    public function getByLoginAndPassword($login, $password)
-    {
+    public function getByLoginAndPassword($login, $password){
         $query = "SELECT * FROM users WHERE login = '$login' AND password = '$password'";
         $result = $this->db->query($query)->fetch_array();
         if (!empty($result)) {
@@ -63,17 +56,14 @@ class User extends Base
             $this->description = $result['description'];
         }
     }
-
-    public function remove($login)
-    {
-        $query = "DELETE FROM users where login = '$login'";
-        $this->db->query($query);
-    }
-
-    public function save()
-    {
+    // Добавить врача
+    public function saveDoc(){
         $query = "INSERT INTO users (fullName, login, password, role, type, description) VALUES ('$this->fullName', '$this->login', '$this->password', '$this->role', '$this->type', '$this->description')";
         $this->db->query($query);
     }
-
+    // Удалить врача
+    public function removeDoc($login){
+        $query = "DELETE FROM users where login = '$login'";
+        $this->db->query($query);
+    }
 }

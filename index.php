@@ -18,7 +18,7 @@ $response = Response::create();
 // отправляем браузеру ответ
 $response->send();
 
-//    // личный кабинет врача
+//    личный кабинет врача
 //    public function show_doc_page() {
 //        echo $this->renderer->render('doc_page.twig', array(
 //            'name' => $_SESSION['user_name']

@@ -30,13 +30,17 @@ class Auth extends preDispatch
             $session->set('user_id', $user->id);
             $session->set('user_name', $user->fullName);
             $session->set('user_role', $user->role);
-            header("location: /adminPage");
+            if ($session->get('user_id') == 0)
+                header("location: /adminPage");
+            else if ($session->get('user_id') == 1)
+                header('location: /docPage');
         }
 
     }
 
     public function logout()
     {
-
+        Session::instance()->destroy();
+        header("location: /");
     }
 }
