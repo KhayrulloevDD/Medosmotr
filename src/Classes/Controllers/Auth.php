@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\preDispatch;
 use App\Models\User;
 use Helpers\Session;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class Auth extends preDispatch
 {
@@ -23,17 +24,20 @@ class Auth extends preDispatch
 
         // User is not exists
         if (!$user->exists) {
-            var_dump("net user");
-            die();
+            $response = new RedirectResponse('/signin', 301);
+            return $response->send();
         } else {
             $session = Session::instance();
             $session->set('user_id', $user->id);
             $session->set('user_name', $user->fullName);
             $session->set('user_role', $user->role);
-            if ($session->get('user_id') == 0)
-                header("location: /adminPage");
-            else if ($session->get('user_id') == 1)
-                header('location: /docPage');
+            if ($session->get('user_role') == 0) {
+                $response = new RedirectResponse('/adminPage', 301);
+                return $response->send();
+            } else if ($session->get('user_role') == 1) {
+                $response = new RedirectResponse('/docPage', 301);
+                return $response->send();
+            }
         }
 
     }
@@ -41,6 +45,9 @@ class Auth extends preDispatch
     public function logout()
     {
         Session::instance()->destroy();
-        header("location: /");
+
+        $response = new RedirectResponse('/', 301);
+        return $response->send();
+
     }
 }

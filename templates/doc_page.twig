@@ -18,7 +18,7 @@
           <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
           Медосмотр
         </a>
-        <input type="button" class="btn btn-primary float-right" value="Выйти" onClick='/signin'>
+        <input type="button" class="btn btn-primary float-right" value="Выйти" id="logoutbtn">
         <a class="color" href=""><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
       </div>
     </nav>
@@ -348,4 +348,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="js/validating.js"></script>
   </body>
+
+  <script>
+      $(document).ready( function() {
+
+          $('#logoutbtn').click( function(event) {
+              window.location = '/logout';
+          });
+
+      });
+  </script>
 </html>

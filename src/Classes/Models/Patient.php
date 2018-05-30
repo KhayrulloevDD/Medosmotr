@@ -18,7 +18,7 @@ class Patient extends Base
         parent::__construct();
 
         if (trim($id)) {
-            $this->get($id);
+            $this->getById($id);
         }
 
     }

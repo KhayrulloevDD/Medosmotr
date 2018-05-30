@@ -4,7 +4,9 @@ namespace App\Controllers;
 
 use \App\preDispatch;
 use \App\Models\User;
+use \App\Models\Patient;
 use \Helpers\Session;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class Users extends preDispatch
 {
@@ -25,13 +27,18 @@ class Users extends preDispatch
         $user->description = $description;
 
         $user->saveDoc();
-        //header("location: /adminPage");
+
+        $response = new RedirectResponse('/adminPage', 301);
+        return $response->send();
+
     }
 
     public function deleteDoc($login){
     	$user = new User();
     	$user->removeDoc($login);
-    	//header
+
+        $response = new RedirectResponse('/adminPage', 301);
+        return $response->send();
     }
 
     public function addPatient(){
@@ -53,13 +60,16 @@ class Users extends preDispatch
     	$user->type = $type;
 
     	$user->savePatient();
-    	//header
+
+        $response = new RedirectResponse('/adminPage', 301);
+        return $response->send();
     }
 
     public function deletePatient($id){
     	//достать $id пациента и передать в функцию
+        $user = new Patient($id);
     	$user->removePatient($id);
-    	//header
+
     }
 
     public function showAdminPage(){
@@ -67,6 +77,7 @@ class Users extends preDispatch
     }
 
     public function showDocPage(){
+
     	echo $this->renderer->render('doc_page.twig', []);
     }
 }

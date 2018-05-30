@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'host' => 'localhost',
+    'host' => 'db',
     'user' => 'root',
-    'password' => '',
+    'password' => 'root',
     'dbname' => 'medosmotr'
 ];
