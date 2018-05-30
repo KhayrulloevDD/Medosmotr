@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Patients;
 use \App\preDispatch;
 use \App\Models\User;
 use \App\Models\Patient;
@@ -77,6 +78,12 @@ class Users extends preDispatch
     }
 
     public function showDocPage(){
+
+        $user = Session::instance();
+        $type = $user->get('user_id');
+
+        $patients = new Patients();
+        $all = $patients->getAllPatientsByType($type);
 
     	echo $this->renderer->render('doc_page.twig', []);
     }

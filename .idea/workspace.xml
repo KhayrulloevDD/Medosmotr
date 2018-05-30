@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08f9323d-ad1f-4f49-9b2b-6ceb63f5bc54" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/Classes/Models/Patients.php" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" afterPath="$PROJECT_DIR$/config/database.php" />
-      <change beforePath="$PROJECT_DIR$/src/Classes/Controllers/Auth.php" afterPath="$PROJECT_DIR$/src/Classes/Controllers/Auth.php" />
       <change beforePath="$PROJECT_DIR$/src/Classes/Controllers/Users.php" afterPath="$PROJECT_DIR$/src/Classes/Controllers/Users.php" />
-      <change beforePath="$PROJECT_DIR$/src/Classes/Models/Patient.php" afterPath="$PROJECT_DIR$/src/Classes/Models/Patient.php" />
-      <change beforePath="$PROJECT_DIR$/src/Helpers/App.php" afterPath="$PROJECT_DIR$/src/Helpers/App.php" />
-      <change beforePath="$PROJECT_DIR$/src/Helpers/Session.php" afterPath="$PROJECT_DIR$/src/Helpers/Session.php" />
-      <change beforePath="$PROJECT_DIR$/src/routes.php" afterPath="$PROJECT_DIR$/src/routes.php" />
-      <change beforePath="$PROJECT_DIR$/templates/admin_page.twig" afterPath="$PROJECT_DIR$/templates/admin_page.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/doc_page.twig" afterPath="$PROJECT_DIR$/templates/doc_page.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,10 +28,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="doc_page.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="doc_page.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/doc_page.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="907">
+            <state relative-caret-position="324">
               <caret line="353" column="0" lean-forward="true" selection-start-line="353" selection-start-column="0" selection-end-line="353" selection-end-column="0" />
               <folding />
             </state>
@@ -48,24 +41,36 @@
       <file leaf-file-name="Users.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Classes/Controllers/Users.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+            <state relative-caret-position="504">
+              <caret line="87" column="55" lean-forward="true" selection-start-line="87" selection-start-column="55" selection-end-line="87" selection-end-column="55" />
               <folding>
-                <element signature="e#35#56#0#PHP" expanded="true" />
+                <element signature="e#35#59#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Patient.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Patient.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Classes/Models/Patient.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="52" column="5" lean-forward="false" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+            <state relative-caret-position="55">
+              <caret line="27" column="42" lean-forward="true" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="57" />
               <folding>
                 <marker date="1527713759993" expanded="true" signature="421:462" ph="SELECT * FRO... raspisanie" />
                 <marker date="1527713759993" expanded="true" signature="1027:1208" ph="INSERT INTO raspisanie... " />
                 <marker date="1527713759993" expanded="true" signature="1333:1370" ph="DELETE FROM raspisanie... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Patients.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Classes/Models/Patients.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="21" lean-forward="false" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+              <folding>
+                <marker date="1527714941427" expanded="true" signature="202:245" ph="SELECT * FRO... raspisanie" />
               </folding>
             </state>
           </provider>
@@ -134,8 +139,9 @@
         <option value="$PROJECT_DIR$/src/Helpers/App.php" />
         <option value="$PROJECT_DIR$/src/routes.php" />
         <option value="$PROJECT_DIR$/src/Classes/Models/User.php" />
-        <option value="$PROJECT_DIR$/src/Classes/Controllers/Users.php" />
         <option value="$PROJECT_DIR$/src/Classes/Models/Patient.php" />
+        <option value="$PROJECT_DIR$/src/Classes/Models/Patients.php" />
+        <option value="$PROJECT_DIR$/src/Classes/Controllers/Users.php" />
       </list>
     </option>
   </component>
@@ -274,7 +280,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16115000" />
+    <option name="totallyTimeSpent" value="16465000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="51" y="23" width="1229" height="664" extended-state="0" />
@@ -324,7 +330,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Classes/Edit_doc_schedule.php" />
     <entry file="file://$PROJECT_DIR$/src/Classes/Save.php" />
     <entry file="file://$PROJECT_DIR$/config/database.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -659,33 +664,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/doc_page.twig">
+    <entry file="file://$PROJECT_DIR$/src/Classes/Models/Patients.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="907">
-          <caret line="353" column="0" lean-forward="true" selection-start-line="353" selection-start-column="0" selection-end-line="353" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Classes/Controllers/Users.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+        <state relative-caret-position="285">
+          <caret line="19" column="21" lean-forward="false" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
           <folding>
-            <element signature="e#35#56#0#PHP" expanded="true" />
+            <marker date="1527714941427" expanded="true" signature="202:245" ph="SELECT * FRO... raspisanie" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Classes/Models/Patient.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="52" column="5" lean-forward="false" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+        <state relative-caret-position="55">
+          <caret line="27" column="42" lean-forward="true" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="57" />
           <folding>
             <marker date="1527713759993" expanded="true" signature="421:462" ph="SELECT * FRO... raspisanie" />
             <marker date="1527713759993" expanded="true" signature="1027:1208" ph="INSERT INTO raspisanie... " />
             <marker date="1527713759993" expanded="true" signature="1333:1370" ph="DELETE FROM raspisanie... " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Classes/Controllers/Users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="87" column="55" lean-forward="true" selection-start-line="87" selection-start-column="55" selection-end-line="87" selection-end-column="55" />
+          <folding>
+            <element signature="e#35#59#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/doc_page.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="353" column="0" lean-forward="true" selection-start-line="353" selection-start-column="0" selection-end-line="353" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
