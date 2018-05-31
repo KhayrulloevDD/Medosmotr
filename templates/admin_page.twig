@@ -47,7 +47,7 @@
             <td>{{row.fullName}}</td>
             <td>{{row.type}}</td>
             <td>{{row.description}}</td>
-            <td><a href="/user/{{row.login}}/removeDoc" class="removeDoc" data-toggle="modal" data-target="#exampleModal">Удалить</a></td>
+            <td><a href="/user/{{row.login}}/removeDoc" data-doc="{{ row.login }}" class="removeDoc" data-toggle="modal" data-target="#exampleModal">Удалить</a></td>
           </tr>
           {% endfor %}
         </tbody>
@@ -150,14 +150,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="static/js/validating.js"></script>
     <script src="static/js/exitbtn.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
       <script>
         $(document).ready( function() {
             $('.removeDoc').click( function(event) {
-
-                var confirmationBtn = $('#removebtn').get(0);
-                confirmationBtn.href = event.target.href;
-
+                var confimationbtn = $('#removebtn').get(0),
+                    removingRow = event.target.href;
+                confimationbtn.href = removingRow;
+                debugger;
             });
         });
       </script>

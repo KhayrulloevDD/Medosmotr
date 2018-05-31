@@ -35,6 +35,7 @@ class Users extends preDispatch
     }
 
     public function deleteDoc($login){
+
     	$user = new User();
     	$user->removeDoc($login);
 
