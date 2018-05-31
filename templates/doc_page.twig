@@ -8,14 +8,14 @@
     <title class="color">{{name}}</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
 
   </head>
   <body>
     <nav class="navbar navbar-dark bg-faded nav-bg color">
       <div class="container">
         <a class="navbar-brand color" href="/">
-          <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          <img src="static/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
           Медосмотр
         </a>
         <input type="button" class="btn btn-primary float-right" value="Выйти" id="logoutbtn">
@@ -336,7 +336,7 @@
     
     <footer class="footer">
       <div class="container text-center">
-        <span class="text-muted">УрфУ 2018</span>
+        <span class="text-muted">Контакты</span>
       </div>
     </footer>
     
@@ -346,16 +346,7 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/additional-methods.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script src="js/validating.js"></script>
+    <script src="static/js/validating.js"></script>
+    <script src="static/js/exitbtn.js"></script>
   </body>
-
-  <script>
-      $(document).ready( function() {
-
-          $('#logoutbtn').click( function(event) {
-              window.location = '/logout';
-          });
-
-      });
-  </script>
 </html>

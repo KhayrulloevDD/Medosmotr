@@ -39,6 +39,7 @@ class User extends Base
             $this->type = $data['type'];
             $this->description = $data['description'];
         }
+        return $data;
     }
 
     public function getByLoginAndPassword($login, $password){
@@ -56,6 +57,14 @@ class User extends Base
             $this->description = $result['description'];
         }
     }
+
+    // Выбор всех врачей
+    public function getAllDocs(){
+        $query = "SELECT * FROM users WHERE role = '1'";
+        $result = $this->db->query($query);
+        return $result;
+    }
+
     // Добавить врача
     public function saveDoc(){
         $query = "INSERT INTO users (fullName, login, password, role, type, description) VALUES ('$this->fullName', '$this->login', '$this->password', '$this->role', '$this->type', '$this->description')";

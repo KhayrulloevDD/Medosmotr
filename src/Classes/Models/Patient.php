@@ -40,6 +40,12 @@ class Patient extends Base
         }
     }
 
+    public function getAllPatientsByType($type){
+        $query = "SELECT * FROM raspisanie WHERE type = '$type'";
+        $result = $this->db->query($query);
+        return $result;
+    }
+
     //Добавить пациента
     public function savePatient(){
         $query = "INSERT INTO raspisanie (name, gr, email, phone, date, time, type) VALUES ('$this->name', '$this->group', '$this->email', '$this->phone', '$this->date', '$this->time', '$this->type')";

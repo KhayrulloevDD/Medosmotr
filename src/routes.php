@@ -2,13 +2,13 @@
 
 return [
 	//1-method 2-option 3-page
-    //Main page
+    //главная страница
     ['GET', '/', ['Index' => 'main']],
-    //Страница входа
+    //страница входа
     ['GET', '/signin', ['Auth' => 'signin']],
-    //Авторизация
+    //авторизация
     ['POST', '/auth', ['Auth' => 'login']],
-    //Выход
+    //выход
     ['GET', '/logout', ['Auth' => 'logout']],
     //добавить врача
     ['POST', '/user/saveDoc', ['Users' => 'addDoc']],
@@ -22,4 +22,6 @@ return [
     ['GET', '/adminPage', ['Users' => 'showAdminPage']],
     //вход в личный кабиент врача
     ['GET', '/docPage', ['Users' => 'showDocPage']],
+    //страница записавшихся пациентов врача
+    ['GET', '/display/{id}', ['Display' => 'displaySchedule']]
 ];

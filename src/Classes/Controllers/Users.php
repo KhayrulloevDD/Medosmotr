@@ -44,7 +44,7 @@ class Users extends preDispatch
 
     public function addPatient(){
     	$name = $this->request->request->get('name');
-    	$group = $this->request->request->get('gr');
+    	$group = $this->request->request->get('group');
     	$email = $this->request->request->get('email');
     	$phone = $this->request->request->get('phone');
     	$date = $this->request->request->get('date');
@@ -61,30 +61,41 @@ class Users extends preDispatch
     	$user->type = $type;
 
     	$user->savePatient();
-
-        $response = new RedirectResponse('/adminPage', 301);
+        $response = new RedirectResponse('/', 301);
         return $response->send();
     }
 
     public function deletePatient($id){
-    	//достать $id пациента и передать в функцию
         $user = new Patient($id);
     	$user->removePatient($id);
 
     }
 
     public function showAdminPage(){
-    	echo $this->renderer->render('admin_page.twig', []);
+    	$user = Session::instance();
+        $type = $user->get('user_id');
+        $name = $user->get('user_name');
+        $users = new User();
+        $data = $users->getAllDocs();
+
+    	echo $this->renderer->render('admin_page.twig', [
+    		'name' => $name,
+    		'docData' => $data
+    	]);
     }
 
     public function showDocPage(){
 
         $user = Session::instance();
         $type = $user->get('user_id');
+        $name = $user->get('user_name');
 
-        $patients = new Patients();
+        $patients = new Patient();
         $all = $patients->getAllPatientsByType($type);
 
-    	echo $this->renderer->render('doc_page.twig', []);
+    	echo $this->renderer->render('doc_page.twig', [
+    		'schedule' => $all,
+    		'name' => $name
+    	]);
     }
 }
