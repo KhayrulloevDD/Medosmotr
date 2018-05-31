@@ -19,14 +19,14 @@
           Медосмотр
         </a>
         {% if name != '' %}
-            <input type="button" class="btn btn-primary float-right" value="Выйти" onClick='location.href="index.php?option=logout"'>
+            <a class="btn btn-primary float-right" href="/logout" role="button">Выход</a>
             {% if status == '0' %}
               <a class="color" href="/adminPage"><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
             {% elseif status == '1' %}
               <a class="color" href="/docPage"><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
             {% endif %}
         {% else %}
-            <input type="button" class="btn btn-primary float-right" value="Вход" onClick='location.href="/signin"'>
+            <a class="btn btn-primary float-right" href="/signin" role="button">Вход</a>
         {% endif %}
       </div>
     </nav>
@@ -42,7 +42,7 @@
         {% for row in docs %}
         <div class="col-lg-4 col-md-6 col-sm-12 mb-3 d-flex align-items-stretch">
           <div class="card">
-            <img class="card-img-top img-fluid" src="static/images/1.png" alt="Card image cap">
+            <img class="card-img-top img-fluid" src="static/images/doc_icon.png" alt="Card image cap">
             <div class="card-block">
               <h4 class="card-title">{{row.type}}</h4>
               <p class="card-text">{{row.fullName}}.</p>
@@ -126,9 +126,40 @@
       </div>
     </div>  
 
-    <footer class="footer">
-      <div class="container text-center">
-        <span class="text-muted">Контакты</span>
+    <footer style="position: absolute;
+    bottom: -15%;
+    width: 100%;
+    height: auto;
+    line-height: auto;
+    background-color: #1C2331;">
+      <div class="container mt-2">
+        <div class="row">
+          <div class="col container text-justify text-muted ml-5">
+              <ul class="list-unstyled">Контакт-центр:
+                <li>
+                  <div>
+                    <h5 class="mb-0">8-800-100-50-44</h5>
+                    <p>Звонок по России бесплатный</p>
+                  </div>
+                </li>
+              </ul>
+              <ul class="list-unstyled">Пресс-служба:
+                <li>+7 (343) 375-97-33</li>
+                <li>news@urfu.ru</li>
+              </ul>
+          </div>
+          <div class="col container text-justify text-muted mr-5">
+              <ul class="list-unstyled">
+                <li><a href="http://urfu.ru/ru/">Оффициальный сайт УрФУ</a></li>
+                <li><a href="https://priem.urfu.ru/#/">Личный кабинет абитуриент</a></li>
+                <li><a href="https://dit.urfu.ru/ru/servisy/">IT поддержка</a></li>
+              </ul>
+              <ul class="list-unstyled">Служба технической поддержки:
+                <li>+7 (343) 375-93-06</a></li>
+                <li>sd@urfu.ru</a></li>
+              </ul>
+          </div>
+        </div>
       </div>
     </footer>
     

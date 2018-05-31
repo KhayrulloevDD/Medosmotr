@@ -17,7 +17,7 @@
           <img src="static/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
           Медосмотр
         </a>
-        <input type="button" class="btn btn-primary float-right" value="Выйти" id="logoutbtn">
+        <a class="btn btn-primary float-right" href="/logout" role="button">Выход</a>
         <a class="color" href=""><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
       </div>
     </nav>
@@ -69,18 +69,11 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
-            <!-- написать джаваскрипт для удаления (/user/{{row.login}}/removeDoc)-->
-            <button type="submit" class="btn btn-primary"><a id="removebtn" class="color">Подтвердить</a></button>
+            <a id="removebtn" class="btn btn-primary" role="button">Подтвердить</a>
           </div>
         </div>
       </div>
     </div>
-
-    <footer class="footer">
-      <div class="container text-center">
-        <span class="text-muted">Контакты</span>
-      </div>
-    </footer>
     
     <div class="container text-right">
       <button type="button" class="btn btn-primary" data-id="0" data-toggle="modal" data-target="#addDoc">Добавить</button>
@@ -148,19 +141,8 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/additional-methods.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script src="static/js/validating.js"></script>
-    <script src="static/js/exitbtn.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-      <script>
-        $(document).ready( function() {
-            $('.removeDoc').click( function(event) {
-                var confimationbtn = $('#removebtn').get(0),
-                    removingRow = event.target.href;
-                confimationbtn.href = removingRow;
-                debugger;
-            });
-        });
-      </script>
+    <script src="static/js/validating.js"></script>
+    <script src="static/js/deleteConfirm.js"></script>
   </body>
 </html>
