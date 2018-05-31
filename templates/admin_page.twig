@@ -47,7 +47,7 @@
             <td>{{row.fullName}}</td>
             <td>{{row.type}}</td>
             <td>{{row.description}}</td>
-            <td><a href="/user/{{row.login}}/removeDoc" data-toggle="modal" data-target="#exampleModal">Удалить</a></td>
+            <td><a href="/user/{{row.login}}/removeDoc" class="removeDoc" data-toggle="modal" data-target="#exampleModal">Удалить</a></td>
           </tr>
           {% endfor %}
         </tbody>
@@ -70,7 +70,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
             <!-- написать джаваскрипт для удаления (/user/{{row.login}}/removeDoc)-->
-            <button type="submit" class="btn btn-primary"><a class="color" href="/user/{{row.login}}/removeDoc">Подтвердить</a></button>
+            <button type="submit" class="btn btn-primary"><a id="removebtn" class="color">Подтвердить</a></button>
           </div>
         </div>
       </div>
@@ -151,5 +151,15 @@
     <script src="static/js/validating.js"></script>
     <script src="static/js/exitbtn.js"></script>
 
+      <script>
+        $(document).ready( function() {
+            $('.removeDoc').click( function(event) {
+
+                var confirmationBtn = $('#removebtn').get(0);
+                confirmationBtn.href = event.target.href;
+
+            });
+        });
+      </script>
   </body>
 </html>
