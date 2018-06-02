@@ -14,19 +14,19 @@
         <!-- Image and text -->
     <nav class="navbar navbar-dark bg-faded nav-bg color">
       <div class="container">
-        <a class="navbar-brand color" href="index.php">
-          <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <a class="navbar-brand color" href="/">
+          <img src="static/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
           Медосмотр
         </a>
         {% if name != '' %}
-            <input type="button" class="btn btn-primary float-right" value="Выйти" onClick='location.href="index.php?option=logout"'>
+            <a class="btn btn-primary float-right" href="/logout" role="button">Выход</a>
             {% if status == '0' %}
-              <a class="color" href="http://localhost/index.php?option=show&page=admin_page"><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
+              <a class="color" href="/adminPage"><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
             {% elseif status == '1' %}
-              <a class="color" href="http://localhost/index.php?option=show&page=doc_page"><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
+              <a class="color" href="/docPage"><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
             {% endif %}
         {% else %}
-            <input type="button" class="btn btn-primary float-right" value="Вход" onClick='location.href="/signin"'>
+            <a class="btn btn-primary float-right" href="/signin" role="button">Вход</a>
         {% endif %}
       </div>
     </nav>
@@ -42,13 +42,13 @@
         {% for row in docs %}
         <div class="col-lg-4 col-md-6 col-sm-12 mb-3 d-flex align-items-stretch">
           <div class="card">
-            <img class="card-img-top img-fluid" src="images/1.png" alt="Card image cap">
+            <img class="card-img-top img-fluid" src="static/images/doc_icon.png" alt="Card image cap">
             <div class="card-block">
               <h4 class="card-title">{{row.type}}</h4>
-              <p class="card-text">{{row.description}}.</p>
+              <p class="card-text">{{row.fullName}}.</p>
               <!-- кнопка вызова модального окна -->
               <button type="button" class="btn btn-primary getdoctype" data-id="{{row.id}}" data-toggle="modal" data-target="#exampleModalLive">Записаться</button>
-              <input type="button" class="btn btn-primary ml-3" value="Расписание" onClick='location.href="index.php?option=show&page=list&type={{row.id}}"'>
+              <input type="button" class="btn btn-primary ml-3" value="Расписание" onClick='location.href="/display/{{row.id}}"'>
               <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
               
               <div class="modal-dialog" role="document">
@@ -60,42 +60,42 @@
                     </button>
                   </div>
                   <!-- форма -->
-                    <form class="form" id="myForm" role="form" method="post" action="index.php?option=save">
+                    <form class="form" id="myForm" role="form" method="post" action="/user/savePatient">
                       <div class="modal-body">
                         <div class="form-group row">
                           <label for="text-input" class="col-2 col-form-label">ФИО</label>
                           <div class="col-10">
-                            <input class="form-control" name="name" type="text" placeholder="Иванов Иван Иванович" id="name1">
+                            <input class="form-control" name="name" type="text" placeholder="Иванов Иван Иванович" id="name">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="text-input" class="col-2 col-form-label">Группа</label>
                           <div class="col-10">
-                            <input class="form-control" name="group" type="text" placeholder="ФО-440002" id="group1">
+                            <input class="form-control" name="group" type="text" placeholder="ФО-440002" id="group">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="email-input" class="col-2 col-form-label">Email</label>
                           <div class="col-10">
-                            <input class="form-control" name="email" type="email" placeholder="example@urfu.com" id="email1">
+                            <input class="form-control" name="email" type="email" placeholder="example@urfu.com" id="email">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="phone-input" class="col-2 col-form-label">Телефон</label>
                           <div class="col-10">
-                            <input class="form-control" name="phone" type="tel" placeholder="5555555555" id="phone1">
+                            <input class="form-control" name="phone" type="tel" placeholder="5555555555" id="phone">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="date-input" class="col-2 col-form-label">Дата</label>
                           <div class="col-10">
-                            <input class="form-control" name="date" type="date" placeholder="2018-01-27" id="date1">
+                            <input class="form-control" name="date" type="date" placeholder="2018-01-27" id="date">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="select1" class="col-2 col-form-label">Время</label>
                           <div class="col-10">
-                            <select class="form-control" name="time" id="time1">
+                            <select class="form-control" name="time" id="time">
                               <option value="8:30">8:30</option>
                               <option value="9:00">9:00</option>
                               <option value="9:45">9:45</option>
@@ -109,7 +109,7 @@
                           </div>
                         </div>
                         <div class="form-group row">
-                          <input class="form-control doc_type_input" type="text" name="doc_type" hidden>
+                          <input class="form-control doc_type_input" type="text" name="type" hidden>
                         </div>
                       </div>
                       <div class="modal-footer">
@@ -126,9 +126,40 @@
       </div>
     </div>  
 
-    <footer class="footer">
-      <div class="container text-center">
-        <span class="text-muted">УрфУ 2018</span>
+    <footer style="position: absolute;
+    bottom: -15%;
+    width: 100%;
+    height: auto;
+    line-height: auto;
+    background-color: #1C2331;">
+      <div class="container mt-2">
+        <div class="row">
+          <div class="col container text-justify text-muted ml-5">
+              <ul class="list-unstyled">Контакт-центр:
+                <li>
+                  <div>
+                    <h5 class="mb-0">8-800-100-50-44</h5>
+                    <p>Звонок по России бесплатный</p>
+                  </div>
+                </li>
+              </ul>
+              <ul class="list-unstyled">Пресс-служба:
+                <li>+7 (343) 375-97-33</li>
+                <li>news@urfu.ru</li>
+              </ul>
+          </div>
+          <div class="col container text-justify text-muted mr-5">
+              <ul class="list-unstyled">
+                <li><a href="http://urfu.ru/ru/">Оффициальный сайт УрФУ</a></li>
+                <li><a href="https://priem.urfu.ru/#/">Личный кабинет абитуриент</a></li>
+                <li><a href="https://dit.urfu.ru/ru/servisy/">IT поддержка</a></li>
+              </ul>
+              <ul class="list-unstyled">Служба технической поддержки:
+                <li>+7 (343) 375-93-06</a></li>
+                <li>sd@urfu.ru</a></li>
+              </ul>
+          </div>
+        </div>
       </div>
     </footer>
     
@@ -139,7 +170,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="/static/js/validating.js"></script>
-
     <script src="/static/js/define_type.js" type="text/javascript"></script>
 
   </body>

@@ -16,7 +16,6 @@ class App
         });
 
         $routeInfo = $dispatcher->dispatch($method, $request);
-        
 
         switch ($routeInfo[0]) {
             case \FastRoute\Dispatcher::NOT_FOUND:

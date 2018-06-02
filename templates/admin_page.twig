@@ -7,17 +7,17 @@
     <title class="color">Администратор</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
 
   </head>
   <body>
     <nav class="navbar navbar-dark bg-faded nav-bg color">
       <div class="container">
-        <a class="navbar-brand color" href="index.php">
-          <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <a class="navbar-brand color" href="/">
+          <img src="static/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
           Медосмотр
         </a>
-        <input type="button" class="btn btn-primary float-right" value="Выйти" onClick='location.href="index.php?option=logout"'>
+        <a class="btn btn-primary float-right" href="/logout" role="button">Выход</a>
         <a class="color" href=""><h5 class="float-right mt-2 mr-2">{{name}}</h5></a>
       </div>
     </nav>
@@ -47,7 +47,7 @@
             <td>{{row.fullName}}</td>
             <td>{{row.type}}</td>
             <td>{{row.description}}</td>
-            <td><a href="/user/{{row.login}}/delete" data-toggle="modal" data-target="#exampleModal">Удалить</a></td>
+            <td><a href="/user/{{row.login}}/removeDoc" data-doc="{{ row.login }}" class="removeDoc" data-toggle="modal" data-target="#exampleModal">Удалить</a></td>
           </tr>
           {% endfor %}
         </tbody>
@@ -69,17 +69,11 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
-            <button type="submit" class="btn btn-primary"><a class="color" href="index.php?option=deleteDoc&login={{row.login}}">Подтвердить</a></button>
+            <a id="removebtn" class="btn btn-primary" role="button">Подтвердить</a>
           </div>
         </div>
       </div>
     </div>
-
-    <footer class="footer">
-      <div class="container text-center">
-        <span class="text-muted">УрфУ 2018</span>
-      </div>
-    </footer>
     
     <div class="container text-right">
       <button type="button" class="btn btn-primary" data-id="0" data-toggle="modal" data-target="#addDoc">Добавить</button>
@@ -95,7 +89,7 @@
           </button>
         </div>
         <!-- форма -->
-        <form class="form" id="myForm" role="form" method="post" action="/user/save">
+        <form class="form" id="myForm" role="form" method="post" action="/user/saveDoc">
           <div class="modal-body">
             <div class="form-group row">
               <label for="login-input" class="col-2 col-form-label">Логин</label>
@@ -110,9 +104,9 @@
               </div>
             </div>
             <div class="form-group row">
-              <label for="type1" class="col-2 col-form-label">Тип</label>
+              <label for="type" class="col-2 col-form-label">Тип</label>
               <div class="col-10">
-                <select class="form-control" name="type" id="type1">
+                <select class="form-control" name="type" id="type">
                   <option value="Терапевт">Терапевт</option>
                   <option value="Окулист">Окулист</option>
                   <option value="Венеролог">Венеролог</option>
@@ -147,6 +141,8 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/additional-methods.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script src="js/validating.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="static/js/validating.js"></script>
+    <script src="static/js/deleteConfirm.js"></script>
   </body>
 </html>
