@@ -73,9 +73,39 @@ class Users extends preDispatch
     }
 
     public function refreshShedule(){
-        var_dump($_POST);
-        die();
-        //$monday_start = $this->request->
+        $monday_start = $this->request->get('select_mon_from');
+        $monday_end = $this->request->get('select_mon_till');
+        $monday_checkbox = $this->request->get('checkbox_mon');
+
+        $tuesday_start = $this->request->get('select_tue_from');
+        $tuesday_end = $this->request->get('select_tue_till');
+        $tuesday_checkbox = $this->request->get('checkbox_tue');
+
+        $wednesday_start = $this->request->get('select_wed_from');
+        $wednesday_end = $this->request->get('select_wed_till');
+        $wednesday_checkbox = $this->request->get('checkbox_wed');
+
+        $thursday_start = $this->request->get('select_thur_from');
+        $thursday_end = $this->request->get('select_thur_till');
+        $thursday_checkbox = $this->request->get('checkbox_thur');
+
+        $friday_start = $this->request->get('select_fri_from');
+        $friday_end = $this->request->get('select_fri_till');
+        $friday_checkbox = $this->request->get('checkbox_fri');
+
+        $saturday_start = $this->request->get('select_sat_from');
+        $saturday_end = $this->request->get('select_sat_till');
+        $saturday_checkbox = $this->request->get('checkbox_sat');
+
+        $sunday_start = $this->request->get('select_sun_from');
+        $sunday_end = $this->request->get('select_sun_till');
+        $sunday_checkbox = $this->request->get('checkbox_sun');
+
+        $user = new User();
+        $user->updateSchedule($monday_start, $monday_end, $monday_checkbox, $tuesday_start, $tuesday_end, $tuesday_checkbox, $wednesday_start, $wednesday_end, $wednesday_checkbox, $thursday_start, $thursday_end, $thursday_checkbox, $friday_start, $friday_end, $friday_checkbox, $saturday_start, $saturday_end, $saturday_checkbox, $sunday_start, $sunday_end, $sunday_checkbox);
+
+        $response = new RedirectResponse('/docPage', 301);
+        return $response->send();
     }
 
     public function showAdminPage(){
@@ -85,7 +115,7 @@ class Users extends preDispatch
         $users = new User();
         $data = $users->getAllDocs();
 
-    	echo $this->renderer->render('admin_page.twig', [
+        echo $this->renderer->render('admin_page.twig', [
     		'name' => $name,
     		'docData' => $data
     	]);
@@ -100,9 +130,13 @@ class Users extends preDispatch
         $patients = new Patient();
         $all = $patients->getAllPatientsByType($type);
 
+        $user = new User();
+        $schedule = $user->getScheduleById(1);
+
     	echo $this->renderer->render('doc_page.twig', [
-    		'schedule' => $all,
-    		'name' => $name
+    		'list' => $all,
+    		'name' => $name,
+            'schedule' => $schedule
     	]);
     }
 }
