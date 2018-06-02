@@ -23,5 +23,7 @@ return [
     //вход в личный кабиент врача
     ['GET', '/docPage', ['Users' => 'showDocPage']],
     //страница записавшихся пациентов врача
-    ['GET', '/display/{id}', ['Display' => 'displaySchedule']]
+    ['GET', '/display/{id}', ['Display' => 'displaySchedule']],
+    //обработка запроса раписания врача
+    ['POST', '/refreshShedule', ['Users' => 'refreshShedule']]
 ];

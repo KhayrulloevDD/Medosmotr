@@ -72,6 +72,12 @@ class Users extends preDispatch
 
     }
 
+    public function refreshShedule(){
+        var_dump($_POST);
+        die();
+        //$monday_start = $this->request->
+    }
+
     public function showAdminPage(){
     	$user = Session::instance();
         $type = $user->get('user_id');

@@ -69,6 +69,21 @@ class User extends Base
     public function saveDoc(){
         $query = "INSERT INTO users (fullName, login, password, role, type, description) VALUES ('$this->fullName', '$this->login', '$this->password', '$this->role', '$this->type', '$this->description')";
         $this->db->query($query);
+        $id = 1;
+        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '1', '8:30', '16:00', '0')";
+        $this->db->query($query);
+        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '2', '8:30', '16:00', '0')";
+        $this->db->query($query);
+        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '3', '8:30', '16:00', '0')";
+        $this->db->query($query);
+        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '4', '8:30', '16:00', '0')";
+        $this->db->query($query);
+        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '5', '8:30', '16:00', '0')";
+        $this->db->query($query);
+        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '6', '8:30', '16:00', '1')";
+        $this->db->query($query);
+        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '7', '8:30', '16:00', '1')";
+        $this->db->query($query);
     }
     // Удалить врача
     public function removeDoc($login){
