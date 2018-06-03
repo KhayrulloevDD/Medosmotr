@@ -45,7 +45,8 @@ class User extends Base
     public function getScheduleById($id){
         $query = "SELECT * FROM schedule WHERE id_doc = '$id'";
         $result = $this->db->query($query);
-        $data;
+
+        $data = [];
         while ($row = $result->fetch_assoc()) {
             $data[] = $row;
         }
@@ -124,6 +125,8 @@ class User extends Base
     public function isDocFree($time) {
         $query = "SELECT * FROM raspisanie WHERE type='$this->id' AND time='$time' LIMIT 1";
         $result = $this->db->query($query)->fetch_assoc();
-        return !!(count($result) === 0);
+        if (is_array($result) && count($result) > 0)
+            return false;
+        return true;
     }
 }

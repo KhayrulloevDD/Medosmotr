@@ -102,7 +102,7 @@ class Users extends preDispatch
         $sunday_checkbox = $this->request->get('checkbox_sun');
 
         $user = new User();
-        $id = $user->get('user_id');
+        $id = Session::instance()->get('user_id');
         $user->updateSchedule($id, $monday_start, $monday_end, $monday_checkbox, $tuesday_start, $tuesday_end, $tuesday_checkbox, $wednesday_start, $wednesday_end, $wednesday_checkbox, $thursday_start, $thursday_end, $thursday_checkbox, $friday_start, $friday_end, $friday_checkbox, $saturday_start, $saturday_end, $saturday_checkbox, $sunday_start, $sunday_end, $sunday_checkbox);
 
         $response = new RedirectResponse('/docPage', 301);
@@ -132,7 +132,7 @@ class Users extends preDispatch
         $all = $patients->getAllPatientsByType($type);
 
         $user = new User();
-        $schedule = $user->getScheduleById(1);
+        $schedule = $user->getScheduleById($type);
 
     	echo $this->renderer->render('doc_page.twig', [
     		'list' => $all,

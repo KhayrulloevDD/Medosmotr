@@ -26,7 +26,6 @@ return [
     ['GET', '/display/{id}', ['Display' => 'displaySchedule']],
     //обработка запроса раписания врача
     ['POST', '/refreshShedule', ['Users' => 'refreshShedule']],
-
     ['POST', '/user/{id}/getSchedule', ['Users' => 'getDocSchedule']],
     ['POST', '/user/{id}/isFree', ['Users' => 'isDocFree']]
 ];
