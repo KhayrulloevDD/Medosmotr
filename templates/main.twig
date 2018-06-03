@@ -176,6 +176,11 @@
             var option = $('option:selected', event.target).get(0);
             var button = $('#submit').get(0);
 
+            if (option.value === '0') {
+                button.disabled = true;
+                return;
+            }
+
             $.ajax({
                url: '/user/' + currentDoc + '/isFree',
                type: 'POST',
@@ -201,6 +206,7 @@
           $('#date').change( function(event) {
              var date = event.currentTarget.valueAsDate;
              var selectedDate = new Date(date);
+             var button = $('#submit').get(0);
 
              var datetime = $('#time').get(0);
              datetime.innerHTML = '';
@@ -213,6 +219,7 @@
                  },
                  beforeSend: function(event) {
                     datetime.disabled = true;
+                    button.disabled = true;
                  },
                  success: function(response) {
                      var schedule = JSON.parse(response);
@@ -239,6 +246,12 @@
                          end_minute = parseInt(end_time[0]);
 
                      var counter = 0;
+
+                     var defaultOption = document.createElement('option');
+                     defaultOption.value = '0';
+                     defaultOption.innerText = 'Выберите время';
+                     datetime.appendChild(defaultOption);
+
                      while ( ( start_hour != end_hour && start_minute != end_minute ) ) {
                         counter ++;
 
