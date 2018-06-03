@@ -12,8 +12,6 @@ Class Session {
 
 	private function __clone() {}
 
-	private function __sleep() {}
-
 	public static function instance() {
 		if (self::$_instance) {
 			return self::$_instance;

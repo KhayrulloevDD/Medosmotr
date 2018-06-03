@@ -72,14 +72,21 @@ class User extends Base
     public function getAllDocs(){
         $query = "SELECT * FROM users WHERE role = '1'";
         $result = $this->db->query($query);
-        return $result;
+
+        $rows = [];
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
     }
 
     // Добавить врача
     public function saveDoc(){
         $query = "INSERT INTO users (fullName, login, password, role, type, description) VALUES ('$this->fullName', '$this->login', '$this->password', '$this->role', '$this->type', '$this->description')";
-        $this->db->query($query);
-        $id = 1; // need to define ID
+        $result = $this->db->query($query);
+        $id = mysqli_insert_id($this->db);
+
         $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '1', '8:30', '16:00', '0')";
         $this->db->query($query);
         $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '2', '8:30', '16:00', '0')";
