@@ -102,7 +102,8 @@ class Users extends preDispatch
         $sunday_checkbox = $this->request->get('checkbox_sun');
 
         $user = new User();
-        $user->updateSchedule($monday_start, $monday_end, $monday_checkbox, $tuesday_start, $tuesday_end, $tuesday_checkbox, $wednesday_start, $wednesday_end, $wednesday_checkbox, $thursday_start, $thursday_end, $thursday_checkbox, $friday_start, $friday_end, $friday_checkbox, $saturday_start, $saturday_end, $saturday_checkbox, $sunday_start, $sunday_end, $sunday_checkbox);
+        $id = $user->get('user_id');
+        $user->updateSchedule($id, $monday_start, $monday_end, $monday_checkbox, $tuesday_start, $tuesday_end, $tuesday_checkbox, $wednesday_start, $wednesday_end, $wednesday_checkbox, $thursday_start, $thursday_end, $thursday_checkbox, $friday_start, $friday_end, $friday_checkbox, $saturday_start, $saturday_end, $saturday_checkbox, $sunday_start, $sunday_end, $sunday_checkbox);
 
         $response = new RedirectResponse('/docPage', 301);
         return $response->send();

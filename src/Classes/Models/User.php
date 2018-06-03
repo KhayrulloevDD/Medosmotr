@@ -86,25 +86,13 @@ class User extends Base
         $query = "INSERT INTO users (fullName, login, password, role, type, description) VALUES ('$this->fullName', '$this->login', '$this->password', '$this->role', '$this->type', '$this->description')";
         $result = $this->db->query($query);
         $id = mysqli_insert_id($this->db);
-
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '1', '8:30', '16:00', '0')";
-        $this->db->query($query);
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '2', '8:30', '16:00', '0')";
-        $this->db->query($query);
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '3', '8:30', '16:00', '0')";
-        $this->db->query($query);
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '4', '8:30', '16:00', '0')";
-        $this->db->query($query);
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '5', '8:30', '16:00', '0')";
-        $this->db->query($query);
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '6', '8:30', '16:00', '1')";
-        $this->db->query($query);
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '7', '8:30', '16:00', '1')";
-        $this->db->query($query);
+        for ($i = 1; $i < 8; $i++){
+            $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '1', '8:30', '16:00', '0')";
+            $this->db->query($query);
+        }
     }
 
-    public function updateSchedule($monday_start, $monday_end, $monday_checkbox, $tuesday_start, $tuesday_end, $tuesday_checkbox, $wednesday_start, $wednesday_end, $wednesday_checkbox, $thursday_start, $thursday_end, $thursday_checkbox, $friday_start, $friday_end, $friday_checkbox, $saturday_start, $saturday_end, $saturday_checkbox, $sunday_start, $sunday_end, $sunday_checkbox){
-        $id = 1; // need to define ID
+    public function updateSchedule($id, $monday_start, $monday_end, $monday_checkbox, $tuesday_start, $tuesday_end, $tuesday_checkbox, $wednesday_start, $wednesday_end, $wednesday_checkbox, $thursday_start, $thursday_end, $thursday_checkbox, $friday_start, $friday_end, $friday_checkbox, $saturday_start, $saturday_end, $saturday_checkbox, $sunday_start, $sunday_end, $sunday_checkbox){
         $query = "UPDATE schedule SET start_time = '$monday_start', end_time = '$monday_end', day_off = '$monday_checkbox' WHERE id_doc = '$id' AND day = '1'";
         $this->db->query($query);
         $query = "UPDATE schedule SET start_time = '$tuesday_start', end_time = '$tuesday_end', day_off = '$tuesday_checkbox' WHERE id_doc = '$id' AND day = '2'";
