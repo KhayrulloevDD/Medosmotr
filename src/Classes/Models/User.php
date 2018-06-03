@@ -87,7 +87,7 @@ class User extends Base
         $result = $this->db->query($query);
         $id = mysqli_insert_id($this->db);
         for ($i = 1; $i < 8; $i++){
-            $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '1', '8:30', '16:00', '0')";
+            $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '$i', '8:30', '16:00', '0')";
             $this->db->query($query);
         }
     }
@@ -113,5 +113,17 @@ class User extends Base
     public function removeDoc($login){
         $query = "DELETE FROM users where login = '$login'";
         $this->db->query($query);
+    }
+
+    public function getSchedule($day) {
+        $query = "SELECT start_time, end_time, day_off FROM schedule WHERE id_doc='$this->id' AND day='$day' LIMIT 1";
+        $result = $this->db->query($query)->fetch_assoc();
+        return $result;
+    }
+
+    public function isDocFree($time) {
+        $query = "SELECT * FROM raspisanie WHERE type='$this->id' AND time='$time' LIMIT 1";
+        $result = $this->db->query($query)->fetch_assoc();
+        return !!(count($result) === 0);
     }
 }

@@ -140,4 +140,24 @@ class Users extends preDispatch
             'schedule' => $schedule
     	]);
     }
+
+    public function getDocSchedule($id) {
+        $day = (int) $this->request->get('day');
+
+        if ($day === 0) {
+            $day = 7;
+        }
+
+        $user = new User($id);
+        $result = $user->getSchedule($day);
+        echo json_encode($result);
+    }
+
+    public function isDocFree($id) {
+        $time = $this->request->get('time');
+
+        $user = new User($id);
+        $result = $user->isDocFree($time);
+        echo json_encode($result);
+    }
 }
