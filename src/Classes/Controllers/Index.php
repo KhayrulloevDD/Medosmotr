@@ -10,9 +10,6 @@ class Index extends preDispatch
 {
     public function main()
     {
-        /*$user = Session::instance();
-        $type = $user->get('user_id');
-        $name = $user->get('user_name');*/
         $session = Session::instance();
         $name = $session->get('user_name');
         $status = $session->get('user_role');

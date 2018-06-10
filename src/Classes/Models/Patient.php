@@ -43,7 +43,13 @@ class Patient extends Base
     public function getAllPatientsByType($type){
         $query = "SELECT * FROM raspisanie WHERE type = '$type'";
         $result = $this->db->query($query);
-        return $result;
+
+        $rows = [];
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
     }
 
     //Добавить пациента

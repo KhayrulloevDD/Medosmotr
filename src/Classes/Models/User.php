@@ -45,7 +45,8 @@ class User extends Base
     public function getScheduleById($id){
         $query = "SELECT * FROM schedule WHERE id_doc = '$id'";
         $result = $this->db->query($query);
-        $data;
+
+        $data = [];
         while ($row = $result->fetch_assoc()) {
             $data[] = $row;
         }
@@ -72,32 +73,27 @@ class User extends Base
     public function getAllDocs(){
         $query = "SELECT * FROM users WHERE role = '1'";
         $result = $this->db->query($query);
-        return $result;
+
+        $rows = [];
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
     }
 
     // Добавить врача
     public function saveDoc(){
         $query = "INSERT INTO users (fullName, login, password, role, type, description) VALUES ('$this->fullName', '$this->login', '$this->password', '$this->role', '$this->type', '$this->description')";
-        $this->db->query($query);
-        $id = 1; // need to define ID
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '1', '8:30', '16:00', '0')";
-        $this->db->query($query);
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '2', '8:30', '16:00', '0')";
-        $this->db->query($query);
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '3', '8:30', '16:00', '0')";
-        $this->db->query($query);
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '4', '8:30', '16:00', '0')";
-        $this->db->query($query);
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '5', '8:30', '16:00', '0')";
-        $this->db->query($query);
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '6', '8:30', '16:00', '1')";
-        $this->db->query($query);
-        $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '7', '8:30', '16:00', '1')";
-        $this->db->query($query);
+        $result = $this->db->query($query);
+        $id = mysqli_insert_id($this->db);
+        for ($i = 1; $i < 8; $i++){
+            $query = "INSERT INTO schedule (id_doc, day, start_time, end_time, day_off) VALUES ('$id', '$i', '8:30', '16:00', '0')";
+            $this->db->query($query);
+        }
     }
 
-    public function updateSchedule($monday_start, $monday_end, $monday_checkbox, $tuesday_start, $tuesday_end, $tuesday_checkbox, $wednesday_start, $wednesday_end, $wednesday_checkbox, $thursday_start, $thursday_end, $thursday_checkbox, $friday_start, $friday_end, $friday_checkbox, $saturday_start, $saturday_end, $saturday_checkbox, $sunday_start, $sunday_end, $sunday_checkbox){
-        $id = 1; // need to define ID
+    public function updateSchedule($id, $monday_start, $monday_end, $monday_checkbox, $tuesday_start, $tuesday_end, $tuesday_checkbox, $wednesday_start, $wednesday_end, $wednesday_checkbox, $thursday_start, $thursday_end, $thursday_checkbox, $friday_start, $friday_end, $friday_checkbox, $saturday_start, $saturday_end, $saturday_checkbox, $sunday_start, $sunday_end, $sunday_checkbox){
         $query = "UPDATE schedule SET start_time = '$monday_start', end_time = '$monday_end', day_off = '$monday_checkbox' WHERE id_doc = '$id' AND day = '1'";
         $this->db->query($query);
         $query = "UPDATE schedule SET start_time = '$tuesday_start', end_time = '$tuesday_end', day_off = '$tuesday_checkbox' WHERE id_doc = '$id' AND day = '2'";
@@ -118,5 +114,19 @@ class User extends Base
     public function removeDoc($login){
         $query = "DELETE FROM users where login = '$login'";
         $this->db->query($query);
+    }
+
+    public function getSchedule($day) {
+        $query = "SELECT start_time, end_time, day_off FROM schedule WHERE id_doc='$this->id' AND day='$day' LIMIT 1";
+        $result = $this->db->query($query)->fetch_assoc();
+        return $result;
+    }
+
+    public function isDocFree($time) {
+        $query = "SELECT * FROM raspisanie WHERE type='$this->id' AND time='$time' LIMIT 1";
+        $result = $this->db->query($query)->fetch_assoc();
+        if (is_array($result) && count($result) > 0)
+            return false;
+        return true;
     }
 }

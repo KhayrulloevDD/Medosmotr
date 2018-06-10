@@ -102,7 +102,8 @@ class Users extends preDispatch
         $sunday_checkbox = $this->request->get('checkbox_sun');
 
         $user = new User();
-        $user->updateSchedule($monday_start, $monday_end, $monday_checkbox, $tuesday_start, $tuesday_end, $tuesday_checkbox, $wednesday_start, $wednesday_end, $wednesday_checkbox, $thursday_start, $thursday_end, $thursday_checkbox, $friday_start, $friday_end, $friday_checkbox, $saturday_start, $saturday_end, $saturday_checkbox, $sunday_start, $sunday_end, $sunday_checkbox);
+        $id = Session::instance()->get('user_id');
+        $user->updateSchedule($id, $monday_start, $monday_end, $monday_checkbox, $tuesday_start, $tuesday_end, $tuesday_checkbox, $wednesday_start, $wednesday_end, $wednesday_checkbox, $thursday_start, $thursday_end, $thursday_checkbox, $friday_start, $friday_end, $friday_checkbox, $saturday_start, $saturday_end, $saturday_checkbox, $sunday_start, $sunday_end, $sunday_checkbox);
 
         $response = new RedirectResponse('/docPage', 301);
         return $response->send();
@@ -131,12 +132,32 @@ class Users extends preDispatch
         $all = $patients->getAllPatientsByType($type);
 
         $user = new User();
-        $schedule = $user->getScheduleById(1);
+        $schedule = $user->getScheduleById($type);
 
     	echo $this->renderer->render('doc_page.twig', [
     		'list' => $all,
     		'name' => $name,
             'schedule' => $schedule
     	]);
+    }
+
+    public function getDocSchedule($id) {
+        $day = (int) $this->request->get('day');
+
+        if ($day === 0) {
+            $day = 7;
+        }
+
+        $user = new User($id);
+        $result = $user->getSchedule($day);
+        echo json_encode($result);
+    }
+
+    public function isDocFree($id) {
+        $time = $this->request->get('time');
+
+        $user = new User($id);
+        $result = $user->isDocFree($time);
+        echo json_encode($result);
     }
 }

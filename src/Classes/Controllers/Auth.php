@@ -33,11 +33,11 @@ class Auth extends preDispatch
             $session->set('user_role', $user->role);
             if ($session->get('user_role') == 0) {
                 $response = new RedirectResponse('/adminPage', 301);
-                return $response->send();
             } else if ($session->get('user_role') == 1) {
                 $response = new RedirectResponse('/docPage', 301);
-                return $response->send();
             }
+
+            return $response->send();
         }
 
     }
