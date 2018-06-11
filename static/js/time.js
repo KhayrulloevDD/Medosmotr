@@ -28,7 +28,7 @@ $(document).ready( function() {
              var isfree = JSON.parse(response);
 
              if (!isfree) {
-                 alert('Muzik zanyat, davay pozhe');
+                 alert('На это время врач занят, выберите другое время..');
                  return;
              }
 
@@ -63,7 +63,7 @@ $(document).ready( function() {
                }
 
                if (+schedule.day_off === 1) {
-                   alert('Muzik otdihaet');
+                   alert('У врача сегодня выходной');
                    return;
                }
 
